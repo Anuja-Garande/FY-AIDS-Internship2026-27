@@ -32,11 +32,7 @@ $isAdmin = ($_SESSION['role'] == "Admin");
 
     <!-- DARK MODE BUTTON -->
 
-    <button id="darkModeToggle" class="theme-toggle">
-
-        <i class="bi bi-moon-stars-fill"></i>
-
-    </button>
+ 
 
 
 
@@ -210,7 +206,7 @@ $isAdmin = ($_SESSION['role'] == "Admin");
 
 
         <!-- Reports -->
-
+<?php if($_SESSION['role'] == "Admin"){ ?>
         <li>
 
             <a href="reports.php"
@@ -226,7 +222,7 @@ $isAdmin = ($_SESSION['role'] == "Admin");
             </a>
 
         </li>
-
+<?php } ?>
 
 
 
@@ -234,22 +230,19 @@ $isAdmin = ($_SESSION['role'] == "Admin");
 
         <!-- Profile -->
 
-        <li>
+<li>
+    <a href="settings.php"
+       class="<?= in_array($current_page, [
+           'settings.php',
+           'profile.php',
+           'change_password.php'
+       ]) ? 'active' : '' ?>">
 
-            <a href="profile.php"
-            
-            class="<?= $current_page=='profile.php'?'active':'' ?>">
+        <i class="bi bi-gear-fill"></i>
+        <span>Settings</span>
 
-
-                <i class="bi bi-person-circle"></i>
-
-                <span>Profile</span>
-
-
-            </a>
-
-        </li>
-
+    </a>
+</li>
 
 
 

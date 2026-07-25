@@ -246,4 +246,6 @@ Cancel
 
 </body>
 
+<script src="assets/js/darkmode.js"></script>
+
 </html>

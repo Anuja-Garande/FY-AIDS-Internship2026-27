@@ -9,21 +9,31 @@
 <title>InventoryPro | Register</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <link rel="stylesheet" href="assets/css/login.css">
 
 </head>
 
+
 <body>
+
 
 <div class="container vh-100 d-flex justify-content-center align-items-center">
 
+
     <div class="login-card">
+
 
         <h2>Create Account</h2>
 
         <p>Register your InventoryPro account</p>
 
+
+
         <form action="register_process.php" method="POST">
+
+
+            <!-- Email -->
 
             <div class="mb-3">
 
@@ -38,6 +48,11 @@
 
             </div>
 
+
+
+
+            <!-- Username -->
+
             <div class="mb-3">
 
                 <label>Username</label>
@@ -50,6 +65,12 @@
                     required>
 
             </div>
+
+
+
+
+
+            <!-- Password -->
 
             <div class="mb-3">
 
@@ -64,42 +85,68 @@
 
             </div>
 
+
+
+
+
+            <!-- Account Type -->
+
             <div class="mb-3">
 
                 <label>Account Type</label>
 
-                <select
-                    name="role"
-                    class="form-select"
-                    required>
+              <input
+    type="text"
+    class="form-control"
+    value="Staff"
+    readonly>
 
-                    <option value="">Select Role</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Staff">Staff</option>
-
-                </select>
+                <small class="color:#dbeafe;">
+                    New accounts are created as Staff accounts.
+                </small>
 
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">
+
+
+
+
+            <button 
+                type="submit" 
+                class="btn btn-primary w-100">
 
                 Create Account
 
             </button>
 
+
+
         </form>
+
+
+
+
 
         <div class="text-center mt-3">
 
+
             Already have an account?
 
-            <a href="login.php">Login</a>
+            <a href="login.php">
+                Login
+            </a>
+
 
         </div>
 
+
+
     </div>
 
+
 </div>
+
+
 
 </body>
 

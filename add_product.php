@@ -1,29 +1,37 @@
 <?php
+session_start();
 
-$host = "localhost";
-$user = "root";
-$password = "";
-$database = "inventory_management";
-
-$conn = mysqli_connect($host, $user, $password, $database);
-
-if (!$conn) {
-    die("Connection Failed : " . mysqli_connect_error());
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
 }
 
-$customers = mysqli_query($conn, "
+$conn = mysqli_connect(
+    "localhost",
+    "root",
+    "",
+    "inventory_management"
+);
+
+if (!$conn) {
+    die("Database Connection Failed");
+}
+
+/* Load Categories */
+$categories = mysqli_query($conn,"
 SELECT *
-FROM customers
-ORDER BY customer_name ASC
+FROM categories
+ORDER BY category_name ASC
 ");
 
-$products = mysqli_query($conn, "
+/* Load Suppliers */
+$suppliers = mysqli_query($conn,"
 SELECT *
-FROM products
-ORDER BY product_name ASC
+FROM suppliers
+ORDER BY supplier_name ASC
 ");
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,292 +40,279 @@ ORDER BY product_name ASC
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add Sale</title>
-
+<title>Add Product</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-
-<!-- COMMON ADMIN CSS (Handles sidebar layout) -->
 <link rel="stylesheet" href="assets/css/admin.css">
-
 
 <style>
 
-:root {
-    --sidebar-width: 260px;
-    --dark-blue: #0a2540;
-    --soft-blue: #f0f4f8;
+:root{
+    --dark-blue:#0a2540;
 }
 
-body {
-    background: var(--soft-blue);
-    font-family: 'Segoe UI', sans-serif;
+body{
+    font-family:'Segoe UI',sans-serif;
 }
 
-/* Main Area Layout */
-#main-content {
-    margin-left: 260px;
-    padding: 30px;
+#main-content{
+    margin-left:260px;
+    padding:30px;
 }
 
-.text-blue-dark {
-    color: var(--dark-blue);
+.card{
+    border:none;
+    border-radius:14px;
 }
 
-/* Card Styling */
-.card {
-    border: none;
-    border-radius: 12px;
-    overflow: hidden;
+.card-header{
+    background:#0d6efd;
+    color:#fff;
+    padding:16px 22px;
 }
 
-/* Card Header */
-.card-header {
-    background: #0d6efd !important;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-}
-
-/* Form Controls */
 .form-control,
-.form-select {
-    border-radius: 8px;
-    padding: 10px 14px;
-    border: 1px solid #dee2e6;
+.form-select{
+    border-radius:8px;
 }
 
-.form-control:focus,
-.form-select:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 .2rem rgba(13, 110, 253, .15);
-}
-
-.form-control[readonly] {
-    background-color: #f8f9fa;
-    opacity: 1;
-}
-
-label {
-    font-weight: 600;
-    color: var(--dark-blue);
-    margin-bottom: 6px;
-}
-
-/* Buttons */
-.btn-primary {
-    border-radius: 6px;
-    padding: 8px 18px;
-    font-weight: 500;
-}
-
-.btn-secondary {
-    border-radius: 6px;
-    padding: 8px 18px;
-    font-weight: 500;
+label{
+    font-weight:600;
+    margin-bottom:6px;
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <?php include("includes/sidebar.php"); ?>
 
-
 <div id="main-content">
 
-    <!-- PAGE HEADER ROW (Title on Left, Back Button on Right) -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-        <h2 class="fw-bold text-blue-dark m-0">
-            <i class="bi bi-cart-plus"></i>
-            Add Sale
-        </h2>
+<h2 class="fw-bold">
 
-        <a href="sales.php" class="btn btn-secondary">
-            <i class="bi bi-arrow-left"></i>
-            Back
-        </a>
+<i class="bi bi-box-seam"></i>
 
-    </div>
+Add Product
 
+</h2>
 
-    <!-- FORM CARD -->
-    <div class="card shadow border-0">
+<a href="products.php" class="btn btn-secondary">
 
-        <div class="card-header">
-            <h5 class="mb-0 fw-semibold">
-                <i class="bi bi-cash-coin me-1"></i>
-                Sale Details
-            </h5>
-        </div>
+<i class="bi bi-arrow-left"></i>
 
+Back
 
-        <div class="card-body p-4">
-
-            <form action="sale_process.php" method="POST">
-
-                <!-- Customer Selection -->
-                <div class="mb-3">
-                    <label class="form-label">Customer</label>
-                    <select name="customer_id" class="form-select" required>
-                        <option value="">-- Select Customer --</option>
-                        <?php while($customer = mysqli_fetch_assoc($customers)) { ?>
-                            <option value="<?php echo $customer['id']; ?>">
-                                <?php echo htmlspecialchars($customer['customer_name']); ?>
-                            </option>
-                        <?php } ?>
-                    </select>
-                </div>
-
-
-                <!-- Product Selection -->
-                <div class="mb-3">
-                    <label class="form-label">Product</label>
-                    <select name="product_id" id="product" class="form-select" required>
-                        <option value="">-- Select Product --</option>
-                        <?php while($product = mysqli_fetch_assoc($products)) { ?>
-                            <option 
-                                value="<?php echo $product['id']; ?>"
-                                data-price="<?php echo $product['selling_price']; ?>"
-                                data-stock="<?php echo $product['quantity']; ?>">
-                                <?php echo htmlspecialchars($product['product_name']); ?> (Stock: <?php echo $product['quantity']; ?>)
-                            </option>
-                        <?php } ?>
-                    </select>
-                </div>
-
-
-                <!-- Stock & Price Row -->
-                <div class="row">
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Available Stock</label>
-                        <input
-                            type="text"
-                            id="stock"
-                            class="form-control"
-                            readonly>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Selling Price</label>
-                        <input
-                            type="number"
-                            step="0.01"
-                            name="selling_price"
-                            id="price"
-                            class="form-control"
-                            readonly>
-                    </div>
-
-                </div>
-
-
-                <!-- Quantity & Total Price Row -->
-                <div class="row">
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Quantity</label>
-                        <input
-                            type="number"
-                            name="quantity"
-                            id="quantity"
-                            class="form-control"
-                            min="1"
-                            placeholder="Enter Quantity"
-                            required>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Total Price</label>
-                        <input
-                            type="text"
-                            id="total_display"
-                            class="form-control"
-                            readonly>
-                        <input
-                            type="hidden"
-                            name="total_price"
-                            id="total_price">
-                    </div>
-
-                </div>
-
-
-                <!-- Sale Date -->
-                <div class="mb-3">
-                    <label class="form-label">Sale Date</label>
-                    <input
-                        type="date"
-                        name="sale_date"
-                        class="form-control"
-                        value="<?php echo date('Y-m-d'); ?>"
-                        required>
-                </div>
-
-
-                <!-- Action Buttons -->
-                <div class="mt-4">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-save me-1"></i>
-                        Save Sale
-                    </button>
-
-                    <a href="sales.php" class="btn btn-secondary ms-2">
-                        <i class="bi bi-x-circle me-1"></i>
-                        Cancel
-                    </a>
-                </div>
-
-            </form>
-
-        </div>
-
-    </div>
+</a>
 
 </div>
 
+<div class="card shadow">
 
-<script>
-const product = document.getElementById("product");
-const price = document.getElementById("price");
-const stock = document.getElementById("stock");
-const qty = document.getElementById("quantity");
-const total = document.getElementById("total_display");
-const hidden = document.getElementById("total_price");
+<div class="card-header">
 
-function calculateSale() {
-    let option = product.options[product.selectedIndex];
-    let selling = parseFloat(option.dataset.price) || 0;
-    let available = parseInt(option.dataset.stock) || 0;
-    let quantity = parseInt(qty.value) || 0;
+<h5 class="mb-0">
 
-    price.value = selling.toFixed(2);
-    stock.value = available;
+<i class="bi bi-plus-circle"></i>
 
-    let amount = selling * quantity;
-    total.value = amount.toFixed(2);
-    hidden.value = amount.toFixed(2);
-}
+Product Details
 
-product.addEventListener("change", calculateSale);
-qty.addEventListener("keyup", calculateSale);
-qty.addEventListener("change", calculateSale);
-</script>
+</h5>
 
+</div>
+
+<div class="card-body p-4">
+
+<form action="product_process.php" method="POST">
+
+<div class="mb-3">
+
+<label>Product Name</label>
+
+<input
+type="text"
+name="product_name"
+class="form-control"
+required>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label>Category</label>
+
+<select
+name="category"
+class="form-select"
+required>
+
+<option value="">Select Category</option>
+
+<?php while($cat=mysqli_fetch_assoc($categories)){ ?>
+
+<option value="<?php echo htmlspecialchars($cat['category_name']); ?>">
+
+<?php echo htmlspecialchars($cat['category_name']); ?>
+
+</option>
+
+<?php } ?>
+
+</select>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Supplier</label>
+
+<select
+name="supplier"
+class="form-select"
+required>
+
+<option value="">Select Supplier</option>
+
+<?php while($sup=mysqli_fetch_assoc($suppliers)){ ?>
+
+<option value="<?php echo htmlspecialchars($sup['supplier_name']); ?>">
+
+<?php echo htmlspecialchars($sup['supplier_name']); ?>
+
+</option>
+
+<?php } ?>
+
+</select>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-4 mb-3">
+
+<label>SKU</label>
+
+<input
+type="text"
+name="sku"
+class="form-control">
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<label>Cost Price</label>
+
+<input
+type="number"
+step="0.01"
+name="cost_price"
+class="form-control"
+required>
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<label>Selling Price</label>
+
+<input
+type="number"
+step="0.01"
+name="selling_price"
+class="form-control"
+required>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label>Quantity</label>
+
+<input
+type="number"
+name="quantity"
+class="form-control"
+required>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label>Unit</label>
+
+<input
+type="text"
+name="unit"
+class="form-control"
+placeholder="pcs, box, kg, litre">
+
+</div>
+
+</div>
+
+<div class="mb-3">
+
+<label>Description</label>
+
+<textarea
+name="description"
+rows="4"
+class="form-control"></textarea>
+
+</div>
+
+<div class="mt-4">
+
+<button
+type="submit"
+class="btn btn-primary">
+
+<i class="bi bi-save"></i>
+
+Save Product
+
+</button>
+
+<a
+href="products.php"
+class="btn btn-secondary ms-2">
+
+Cancel
+
+</a>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-</body>
+<script src="assets/js/darkmode.js"></script>
 
+</body>
 </html>
 
 <?php

@@ -135,8 +135,6 @@ if(!isset($_SESSION['username']))
 <!-- ALERTS -->
 
 
-<?php if(isset($_GET['success'])){ ?>
-
 
 <div class="alert alert-success alert-dismissible fade show">
 
@@ -152,8 +150,6 @@ Sale Added Successfully.
 
 </div>
 
-
-<?php } ?>
 
 
 
@@ -227,7 +223,6 @@ Sales Management
 </h2>
 
 
-<?php if($_SESSION['role']=="Admin"){ ?>
 
 <a href="add_sale.php" class="btn btn-primary">
 
@@ -240,7 +235,6 @@ Add Sale
 
 </a>
 
-<?php } ?>
 
 </div>
 

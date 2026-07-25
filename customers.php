@@ -233,7 +233,7 @@ Customer Management
 </h2>
 
 
-<?php if($_SESSION['role']=="Admin"){ ?>
+
 
 <a href="add_customer.php" class="btn btn-primary">
 
@@ -246,7 +246,6 @@ Add Customer
 
 </a>
 
-<?php } ?>
 
 </div>
 

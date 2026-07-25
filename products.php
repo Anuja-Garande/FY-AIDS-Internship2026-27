@@ -164,7 +164,7 @@ Product Management
 </h2>
 
 
-<?php if($_SESSION['role']=="Admin"){ ?>
+
 
 <a href="add_product.php" class="btn btn-primary">
 
@@ -176,8 +176,6 @@ Add Product
 
 
 </div>
-
-<?php } ?>
 
 
 

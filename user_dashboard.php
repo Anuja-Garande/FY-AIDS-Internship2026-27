@@ -563,6 +563,8 @@ setTimeout(function(){
 
 </script>
 
+<script src="assets/js/darkmode.js"></script>
+
 </body>
 
 </html>

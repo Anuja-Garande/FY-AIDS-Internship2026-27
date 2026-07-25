@@ -219,127 +219,76 @@ Change Password
 
 
 
-<div class="card shadow-sm border-0 p-4">
+<div class="card shadow border-0">
 
+    <div class="card-header">
+        <h5 class="mb-0 fw-semibold">
+            <i class="bi bi-shield-lock me-2"></i>
+            Update Password
+        </h5>
+    </div>
 
+    <div class="card-body p-4">
 
+        <form method="POST">
 
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    Current Password
+                </label>
 
-<form method="POST">
+                <input
+                    type="password"
+                    name="current_password"
+                    class="form-control"
+                    placeholder="Enter current password"
+                    required>
+            </div>
 
+            <div class="mb-3">
+                <label class="form-label fw-semibold">
+                    New Password
+                </label>
 
+                <input
+                    type="password"
+                    name="new_password"
+                    class="form-control"
+                    placeholder="Enter new password"
+                    required>
+            </div>
 
+            <div class="mb-4">
+                <label class="form-label fw-semibold">
+                    Confirm New Password
+                </label>
 
+                <input
+                    type="password"
+                    name="confirm_password"
+                    class="form-control"
+                    placeholder="Confirm new password"
+                    required>
+            </div>
 
+            <button
+                type="submit"
+                name="change"
+                class="btn btn-warning">
+                <i class="bi bi-key-fill me-1"></i>
+                Change Password
+            </button>
 
-<div class="mb-3">
+            <a href="profile.php" class="btn btn-secondary ms-2">
+                <i class="bi bi-arrow-left me-1"></i>
+                Cancel
+            </a>
 
+        </form>
 
-<label class="fw-bold">
-
-Current Password
-
-</label>
-
-
-<input 
-type="password"
-name="current_password"
-class="form-control"
-required>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="mb-3">
-
-
-<label class="fw-bold">
-
-New Password
-
-</label>
-
-
-<input 
-type="password"
-name="new_password"
-class="form-control"
-required>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="mb-3">
-
-
-<label class="fw-bold">
-
-Confirm New Password
-
-</label>
-
-
-<input 
-type="password"
-name="confirm_password"
-class="form-control"
-required>
-
+    </div>
 
 </div>
-
-
-
-
-
-
-
-
-<button 
-class="btn btn-warning"
-name="change">
-
-
-<i class="bi bi-lock"></i>
-
-
-Change Password
-
-
-</button>
-
-
-
-<a href="profile.php"
-class="btn btn-secondary">
-
-
-Cancel
-
-
-</a>
-
-
-
-
-
-</form>
-
 
 
 
@@ -353,7 +302,9 @@ Cancel
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<script src="assets/js/darkmode.js"></script>
 
 
 
