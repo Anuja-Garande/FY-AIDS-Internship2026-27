@@ -101,15 +101,19 @@ if(!isset($_SESSION['username']))
 
 
 
+<?php if(isset($_GET['added'])){ ?>
+
 <div class="alert alert-success alert-dismissible fade show">
 
-<i class="bi bi-check-circle"></i>
+    <i class="bi bi-check-circle"></i>
 
-Product Added Successfully
+    Product Added Successfully.
 
-<button class="btn-close" data-bs-dismiss="alert"></button>
+    <button class="btn-close" data-bs-dismiss="alert"></button>
 
 </div>
+
+<?php } ?>
 
 
 

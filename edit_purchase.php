@@ -41,296 +41,201 @@ ORDER BY product_name ASC
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Edit Purchase</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
-
-<style>
-
-body{
-background:#f4f7fb;
-font-family:Segoe UI;
-}
-
-#sidebar{
-width:260px;
-height:100vh;
-background:#0A2540;
-position:fixed;
-left:0;
-top:0;
-padding:20px;
-overflow-y:auto;
-}
-
-#main{
-margin-left:260px;
-padding:30px;
-}
-
-.nav-link{
-color:#d1d5db;
-margin-bottom:5px;
-}
-
-.nav-link.active,
-.nav-link:hover{
-background:#0d6efd;
-color:white;
-}
-
-.card{
-border:none;
-border-radius:15px;
-}
-
-</style>
+<link rel="stylesheet" href="assets/css/admin.css">
 
 </head>
 
 <body>
 
-<div id="sidebar" class="d-flex flex-column text-white">
+<?php include("includes/sidebar.php"); ?>
 
-<a href="dashboard.php" class="d-flex align-items-center mb-4 text-white text-decoration-none">
+<div id="main-content">
 
-<i class="bi bi-box-seam fs-4 me-2 text-info"></i>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<span class="fs-5 fw-bold">IMS Dashboard</span>
+        <h2 class="page-title mb-0">
+            <i class="bi bi-cart-plus"></i>
+            Edit Purchase
+        </h2>
 
-</a>
+        <a href="purchases.php" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Back
+        </a>
 
-<hr>
+    </div>
 
-<ul class="nav nav-pills flex-column">
+    <div class="table-container shadow">
 
-<li><a href="dashboard.php" class="nav-link">Dashboard</a></li>
+        <form action="update_purchase.php" method="POST">
 
-<li><a href="products.php" class="nav-link">Product Management</a></li>
+            <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
 
-<li><a href="categories.php" class="nav-link">Category Management</a></li>
+            <div class="mb-4">
 
-<li><a href="suppliers.php" class="nav-link">Supplier Management</a></li>
+                <label class="form-label fw-semibold">
+                    Supplier
+                </label>
 
-<li><a href="customers.php" class="nav-link">Customer Management</a></li>
+                <select name="supplier_id" class="form-select" required>
 
-<li><a href="purchases.php" class="nav-link active">Purchase Management</a></li>
+                    <?php while($supplier=mysqli_fetch_assoc($suppliers)){ ?>
 
-<li><a href="sales.php" class="nav-link">Sales Management</a></li>
+                        <option
+                            value="<?php echo $supplier['id']; ?>"
+                            <?php if($supplier['id']==$data['supplier_id']) echo "selected"; ?>>
 
-<li><a href="reports.php" class="nav-link">Reports</a></li>
+                            <?php echo htmlspecialchars($supplier['supplier_name']); ?>
 
-</ul>
+                        </option>
 
-</div>
+                    <?php } ?>
 
-<div id="main">
+                </select>
 
-<div class="card shadow">
+            </div>
 
-<div class="card-header bg-primary text-white">
+            <div class="mb-4">
 
-<h4>Edit Purchase</h4>
+                <label class="form-label fw-semibold">
+                    Product
+                </label>
 
-</div>
+                <select name="product_id" class="form-select" required>
 
-<div class="card-body">
+                    <?php while($product=mysqli_fetch_assoc($products)){ ?>
 
-<form action="update_purchase.php" method="POST">
+                        <option
+                            value="<?php echo $product['id']; ?>"
+                            <?php if($product['id']==$data['product_id']) echo "selected"; ?>>
 
-<input type="hidden" name="id" value="<?php echo $data['id']; ?>">
-<div class="mb-3">
+                            <?php echo htmlspecialchars($product['product_name']); ?>
 
-<label class="form-label">Supplier</label>
+                        </option>
 
-<select name="supplier_id" class="form-select" required>
+                    <?php } ?>
 
-<?php
+                </select>
 
-while($supplier=mysqli_fetch_assoc($suppliers))
-{
+            </div>
 
-?>
+            <div class="row">
 
-<option value="<?php echo $supplier['id']; ?>"
+                <div class="col-md-6 mb-4">
 
-<?php
-if($supplier['id']==$data['supplier_id'])
-echo "selected";
-?>
+                    <label class="form-label fw-semibold">
+                        Quantity
+                    </label>
 
->
+                    <input
+                        type="number"
+                        name="quantity"
+                        id="quantity"
+                        class="form-control"
+                        value="<?php echo $data['quantity']; ?>"
+                        required
+                        onkeyup="calculateTotal()"
+                        onchange="calculateTotal()">
 
-<?php echo htmlspecialchars($supplier['supplier_name']); ?>
+                </div>
 
-</option>
+                <div class="col-md-6 mb-4">
 
-<?php
+                    <label class="form-label fw-semibold">
+                        Purchase Price
+                    </label>
 
-}
+                    <input
+                        type="number"
+                        step="0.01"
+                        name="purchase_price"
+                        id="purchase_price"
+                        class="form-control"
+                        value="<?php echo $data['purchase_price']; ?>"
+                        required
+                        onkeyup="calculateTotal()"
+                        onchange="calculateTotal()">
 
-?>
+                </div>
 
-</select>
+            </div>
 
-</div>
+            <div class="row">
 
-<div class="mb-3">
+                <div class="col-md-6 mb-4">
 
-<label class="form-label">Product</label>
+                    <label class="form-label fw-semibold">
+                        Total Price
+                    </label>
 
-<select name="product_id" class="form-select" required>
+                    <input
+                        type="text"
+                        id="total_display"
+                        class="form-control"
+                        value="<?php echo number_format($data['total_price'],2,'.',''); ?>"
+                        readonly>
 
-<?php
+                    <input
+                        type="hidden"
+                        name="total_price"
+                        id="total_price"
+                        value="<?php echo $data['total_price']; ?>">
 
-while($product=mysqli_fetch_assoc($products))
-{
+                </div>
 
-?>
+                <div class="col-md-6 mb-4">
 
-<option value="<?php echo $product['id']; ?>"
+                    <label class="form-label fw-semibold">
+                        Purchase Date
+                    </label>
 
-<?php
-if($product['id']==$data['product_id'])
-echo "selected";
-?>
+                    <input
+                        type="date"
+                        name="purchase_date"
+                        class="form-control"
+                        value="<?php echo $data['purchase_date']; ?>"
+                        required>
 
->
+                </div>
 
-<?php echo htmlspecialchars($product['product_name']); ?>
+            </div>
 
-</option>
+            <div class="d-flex gap-2">
 
-<?php
+                <button
+                    type="submit"
+                    class="btn btn-primary">
 
-}
+                    <i class="bi bi-pencil-square"></i>
+                    Update Purchase
 
-?>
+                </button>
 
-</select>
+                <a
+                    href="purchases.php"
+                    class="btn btn-secondary">
 
-</div>
+                    Cancel
 
-<div class="row">
+                </a>
 
-<div class="col-md-6 mb-3">
+            </div>
 
-<label class="form-label">
+        </form>
 
-Quantity
-
-</label>
-
-<input
-type="number"
-name="quantity"
-id="quantity"
-class="form-control"
-value="<?php echo $data['quantity']; ?>"
-required
-onkeyup="calculateTotal()"
-onchange="calculateTotal()">
-
-</div>
-
-<div class="col-md-6 mb-3">
-
-<label class="form-label">
-
-Purchase Price
-
-</label>
-
-<input
-type="number"
-step="0.01"
-name="purchase_price"
-id="purchase_price"
-class="form-control"
-value="<?php echo $data['purchase_price']; ?>"
-required
-onkeyup="calculateTotal()"
-onchange="calculateTotal()">
-
-</div>
-
-</div>
-
-<div class="row">
-
-<div class="col-md-6 mb-3">
-
-<label class="form-label">
-
-Total Price
-
-</label>
-
-<input
-type="text"
-id="total_display"
-class="form-control"
-value="<?php echo number_format($data['total_price'],2,'.',''); ?>"
-readonly>
-
-<input
-type="hidden"
-name="total_price"
-id="total_price"
-value="<?php echo $data['total_price']; ?>">
-
-</div>
-
-<div class="col-md-6 mb-3">
-
-<label class="form-label">
-
-Purchase Date
-
-</label>
-
-<input
-type="date"
-name="purchase_date"
-class="form-control"
-value="<?php echo $data['purchase_date']; ?>"
-required>
-
-</div>
-
-</div>
-
-<div class="mt-4">
-
-<button class="btn btn-primary">
-
-<i class="bi bi-save"></i>
-
-Update Purchase
-
-</button>
-
-<a href="purchases.php" class="btn btn-secondary">
-
-Cancel
-
-</a>
-
-</div>
-
-</form>
-
-</div>
-
-</div>
+    </div>
 
 </div>
 
@@ -338,28 +243,26 @@ Cancel
 
 function calculateTotal(){
 
-let qty=parseFloat(document.getElementById('quantity').value)||0;
+    let qty=parseFloat(document.getElementById('quantity').value)||0;
+    let price=parseFloat(document.getElementById('purchase_price').value)||0;
+    let total=qty*price;
 
-let price=parseFloat(document.getElementById('purchase_price').value)||0;
-
-let total=qty*price;
-
-document.getElementById("total_display").value=total.toFixed(2);
-
-document.getElementById("total_price").value=total.toFixed(2);
+    document.getElementById("total_display").value=total.toFixed(2);
+    document.getElementById("total_price").value=total.toFixed(2);
 
 }
+
+calculateTotal();
 
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/darkmode.js"></script>
 
 </body>
 
 </html>
 
 <?php
-
 mysqli_close($conn);
-
 ?>

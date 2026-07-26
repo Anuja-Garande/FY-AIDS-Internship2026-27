@@ -40,327 +40,223 @@ ORDER BY product_name
 ");
 
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Edit Sale</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
-
-<style>
-
-body{
-background:#f4f7fb;
-font-family:Segoe UI;
-}
-
-#sidebar{
-width:260px;
-height:100vh;
-background:#0A2540;
-position:fixed;
-left:0;
-top:0;
-padding:20px;
-overflow-y:auto;
-}
-
-#main{
-margin-left:260px;
-padding:30px;
-}
-
-.nav-link{
-color:#d1d5db;
-margin-bottom:5px;
-}
-
-.nav-link:hover,
-.nav-link.active{
-background:#0d6efd;
-color:white;
-}
-
-.card{
-border:none;
-border-radius:15px;
-}
-
-</style>
+<link rel="stylesheet" href="assets/css/admin.css">
 
 </head>
 
 <body>
 
-<div id="sidebar" class="d-flex flex-column text-white">
+<?php include("includes/sidebar.php"); ?>
 
-<a href="dashboard.php" class="d-flex align-items-center mb-4 text-white text-decoration-none">
+<div id="main-content">
 
-<i class="bi bi-box-seam fs-4 me-2 text-info"></i>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<span class="fs-5 fw-bold">
+        <h2 class="page-title mb-0">
+            <i class="bi bi-cash-coin"></i>
+            Edit Sale
+        </h2>
 
-IMS Dashboard
+        <a href="sales.php" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Back
+        </a>
 
-</span>
+    </div>
 
-</a>
+    <div class="table-container shadow">
 
-<hr>
+        <form action="update_sale.php" method="POST">
 
-<ul class="nav nav-pills flex-column">
+            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+            <input type="hidden" name="old_quantity" value="<?php echo $row['quantity']; ?>">
 
-<li><a href="dashboard.php" class="nav-link"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a></li>
+            <div class="mb-4">
 
-<li><a href="products.php" class="nav-link"><i class="bi bi-box me-2"></i>Product Management</a></li>
+                <label class="form-label fw-semibold">
+                    Customer
+                </label>
 
-<li><a href="categories.php" class="nav-link"><i class="bi bi-tags me-2"></i>Category Management</a></li>
+                <select name="customer_id" class="form-select" required>
 
-<li><a href="suppliers.php" class="nav-link"><i class="bi bi-truck me-2"></i>Supplier Management</a></li>
+                    <?php while($customer=mysqli_fetch_assoc($customers)){ ?>
 
-<li><a href="customers.php" class="nav-link"><i class="bi bi-people me-2"></i>Customer Management</a></li>
+                    <option
+                        value="<?php echo $customer['id']; ?>"
+                        <?php if($customer['id']==$row['customer_id']) echo "selected"; ?>>
 
-<li><a href="purchases.php" class="nav-link"><i class="bi bi-cart-plus me-2"></i>Purchase Management</a></li>
+                        <?php echo htmlspecialchars($customer['customer_name']); ?>
 
-<li><a href="sales.php" class="nav-link active"><i class="bi bi-cash-coin me-2"></i>Sales Management</a></li>
+                    </option>
 
-<li><a href="#" class="nav-link"><i class="bi bi-journal-text me-2"></i>Reports</a></li>
+                    <?php } ?>
 
-</ul>
+                </select>
 
-<hr>
+            </div>
 
-<div class="dropdown">
+            <div class="mb-4">
 
-<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                <label class="form-label fw-semibold">
+                    Product
+                </label>
 
-<i class="bi bi-person-circle fs-5 me-2 text-info"></i>
+                <select
+                    name="product_id"
+                    id="product"
+                    class="form-select"
+                    required>
 
-<strong>Mayank Upadhyay</strong>
+                    <?php while($product=mysqli_fetch_assoc($products)){ ?>
 
-</a>
+                    <option
+                        value="<?php echo $product['id']; ?>"
+                        data-price="<?php echo $product['selling_price']; ?>"
+                        data-stock="<?php echo $product['quantity']; ?>"
+                        <?php if($product['id']==$row['product_id']) echo "selected"; ?>>
 
-<ul class="dropdown-menu dropdown-menu-dark">
+                        <?php echo htmlspecialchars($product['product_name']); ?>
 
-<li>
+                        (Stock : <?php echo $product['quantity']; ?>)
 
-<a class="dropdown-item" href="login.php">
+                    </option>
 
-<i class="bi bi-box-arrow-right me-2"></i>
+                    <?php } ?>
 
-Logout
+                </select>
 
-</a>
+            </div>
 
-</li>
+            <div class="row">
 
-</ul>
+                <div class="col-md-6 mb-4">
 
-</div>
+                    <label class="form-label fw-semibold">
+                        Available Stock
+                    </label>
 
-</div>
+                    <input
+                        type="text"
+                        id="stock"
+                        class="form-control"
+                        readonly>
 
-<div id="main">
+                </div>
 
-<div class="card shadow">
+                <div class="col-md-6 mb-4">
 
-<div class="card-header bg-warning">
+                    <label class="form-label fw-semibold">
+                        Selling Price
+                    </label>
 
-<h4>
+                    <input
+                        type="number"
+                        step="0.01"
+                        name="selling_price"
+                        id="price"
+                        class="form-control"
+                        value="<?php echo $row['selling_price']; ?>"
+                        readonly>
 
-<i class="bi bi-pencil-square"></i>
+                </div>
 
-Edit Sale
+            </div>
 
-</h4>
+            <div class="row">
 
-</div>
+                <div class="col-md-6 mb-4">
 
-<div class="card-body">
+                    <label class="form-label fw-semibold">
+                        Quantity
+                    </label>
 
-<form action="update_sale.php" method="POST">
+                    <input
+                        type="number"
+                        name="quantity"
+                        id="quantity"
+                        class="form-control"
+                        value="<?php echo $row['quantity']; ?>"
+                        required>
 
-<input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                </div>
 
-<input type="hidden" name="old_quantity" value="<?php echo $row['quantity']; ?>">
-<div class="mb-3">
+                <div class="col-md-6 mb-4">
 
-<label class="form-label">Customer</label>
+                    <label class="form-label fw-semibold">
+                        Total Price
+                    </label>
 
-<select name="customer_id" class="form-select" required>
+                    <input
+                        type="text"
+                        id="total_display"
+                        class="form-control"
+                        value="<?php echo number_format($row['total_price'],2); ?>"
+                        readonly>
 
-<?php while($customer=mysqli_fetch_assoc($customers)){ ?>
+                    <input
+                        type="hidden"
+                        name="total_price"
+                        id="total_price"
+                        value="<?php echo $row['total_price']; ?>">
 
-<option
-value="<?php echo $customer['id']; ?>"
-<?php if($customer['id']==$row['customer_id']) echo "selected"; ?>>
+                </div>
 
-<?php echo htmlspecialchars($customer['customer_name']); ?>
+            </div>
 
-</option>
+            <div class="mb-4">
 
-<?php } ?>
+                <label class="form-label fw-semibold">
+                    Sale Date
+                </label>
 
-</select>
+                <input
+                    type="date"
+                    name="sale_date"
+                    class="form-control"
+                    value="<?php echo $row['sale_date']; ?>"
+                    required>
 
-</div>
+            </div>
 
-<div class="mb-3">
+            <div class="d-flex gap-2">
 
-<label class="form-label">Product</label>
+                <button
+                    type="submit"
+                    class="btn btn-primary">
 
-<select name="product_id" id="product" class="form-select" required>
+                    <i class="bi bi-pencil-square"></i>
 
-<?php while($product=mysqli_fetch_assoc($products)){ ?>
+                    Update Sale
 
-<option
-value="<?php echo $product['id']; ?>"
-data-price="<?php echo $product['selling_price']; ?>"
-data-stock="<?php echo $product['quantity']; ?>"
-<?php if($product['id']==$row['product_id']) echo "selected"; ?>>
+                </button>
 
-<?php echo htmlspecialchars($product['product_name']); ?>
+                <a
+                    href="sales.php"
+                    class="btn btn-secondary">
 
-(Stock : <?php echo $product['quantity']; ?>)
+                    Cancel
 
-</option>
+                </a>
 
-<?php } ?>
+            </div>
 
-</select>
+        </form>
 
-</div>
-
-<div class="row">
-
-<div class="col-md-6 mb-3">
-
-<label class="form-label">
-
-Available Stock
-
-</label>
-
-<input
-type="text"
-id="stock"
-class="form-control"
-readonly>
-
-</div>
-
-<div class="col-md-6 mb-3">
-
-<label class="form-label">
-
-Selling Price
-
-</label>
-
-<input
-type="number"
-step="0.01"
-name="selling_price"
-id="price"
-class="form-control"
-value="<?php echo $row['selling_price']; ?>"
-readonly>
-
-</div>
-
-</div>
-
-<div class="row">
-
-<div class="col-md-6 mb-3">
-
-<label class="form-label">
-
-Quantity
-
-</label>
-
-<input
-type="number"
-name="quantity"
-id="quantity"
-class="form-control"
-value="<?php echo $row['quantity']; ?>"
-required>
-
-</div>
-
-<div class="col-md-6 mb-3">
-
-<label class="form-label">
-
-Total Price
-
-</label>
-
-<input
-type="text"
-id="total_display"
-class="form-control"
-readonly
-value="<?php echo number_format($row['total_price'],2); ?>">
-
-<input
-type="hidden"
-name="total_price"
-id="total_price"
-value="<?php echo $row['total_price']; ?>">
-
-</div>
-
-</div>
-
-<div class="mb-3">
-
-<label class="form-label">
-
-Sale Date
-
-</label>
-
-<input
-type="date"
-name="sale_date"
-class="form-control"
-value="<?php echo $row['sale_date']; ?>"
-required>
-
-</div>
-
-<div class="mt-4">
-
-<button type="submit" class="btn btn-warning">
-
-<i class="bi bi-check-circle"></i>
-
-Update Sale
-
-</button>
-
-<a href="sales.php" class="btn btn-secondary">
-
-Cancel
-
-</a>
-
-</div>
-
-</form>
-
-</div>
-
-</div>
+    </div>
 
 </div>
 
@@ -375,23 +271,19 @@ const hidden=document.getElementById("total_price");
 
 function calculateSale(){
 
-let option=product.options[product.selectedIndex];
+    let option=product.options[product.selectedIndex];
 
-let p=parseFloat(option.dataset.price)||0;
+    let p=parseFloat(option.dataset.price)||0;
+    let s=parseInt(option.dataset.stock)||0;
+    let q=parseInt(qty.value)||0;
 
-let s=parseInt(option.dataset.stock)||0;
+    price.value=p.toFixed(2);
+    stock.value=s;
 
-let q=parseInt(qty.value)||0;
+    let t=p*q;
 
-price.value=p.toFixed(2);
-
-stock.value=s;
-
-let t=p*q;
-
-total.value=t.toFixed(2);
-
-hidden.value=t.toFixed(2);
+    total.value=t.toFixed(2);
+    hidden.value=t.toFixed(2);
 
 }
 
@@ -404,13 +296,11 @@ calculateSale();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/darkmode.js"></script>
 
 </body>
-
 </html>
 
 <?php
-
 mysqli_close($conn);
-
 ?>

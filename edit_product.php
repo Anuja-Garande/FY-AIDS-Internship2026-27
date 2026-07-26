@@ -7,21 +7,21 @@ $database = "inventory_management";
 
 $conn = mysqli_connect($host, $user, $password, $database);
 
-if(!$conn){
+if (!$conn) {
     die("Connection Failed : " . mysqli_connect_error());
 }
 
-if(!isset($_GET['id'])){
+if (!isset($_GET['id'])) {
     header("Location: products.php");
     exit();
 }
 
-$id = $_GET['id'];
+$id = intval($_GET['id']);
 
 $sql = "SELECT * FROM products WHERE id='$id'";
-$result = mysqli_query($conn,$sql);
+$result = mysqli_query($conn, $sql);
 
-if(mysqli_num_rows($result)==0){
+if (mysqli_num_rows($result) == 0) {
     header("Location: products.php");
     exit();
 }
@@ -41,265 +41,217 @@ $row = mysqli_fetch_assoc($result);
 <title>Edit Product</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-<style>
-
-:root{
---sidebar-width:260px;
---dark-blue:#0a2540;
---soft-blue:#f0f4f8;
-}
-
-body{
-background:var(--soft-blue);
-font-family:'Segoe UI',sans-serif;
-}
-
-#sidebar{
-width:260px;
-height:100vh;
-background:var(--dark-blue);
-position:fixed;
-left:0;
-top:0;
-padding:20px;
-}
-
-#sidebar .nav-link{
-color:#d1d5db;
-}
-
-#sidebar .nav-link:hover,
-#sidebar .nav-link.active{
-background:rgba(255,255,255,.1);
-color:white;
-border-left:4px solid #38bdf8;
-}
-
-#main-content{
-margin-left:260px;
-padding:30px;
-}
-
-.card{
-border:none;
-border-radius:15px;
-}
-
-</style>
+<link rel="stylesheet" href="assets/css/admin.css">
 
 </head>
 
 <body>
 
-<div id="sidebar">
-
-<h3 class="text-white mb-4">
-<i class="bi bi-box-seam"></i>
-IMS Dashboard
-</h3>
-
-<ul class="nav flex-column">
-
-<li>
-<a href="dashboard.php" class="nav-link">
-<i class="bi bi-speedometer2 me-2"></i>
-Dashboard
-</a>
-</li>
-
-<li>
-<a href="products.php" class="nav-link active">
-<i class="bi bi-box me-2"></i>
-Product Management
-</a>
-</li>
-
-</ul>
-
-</div>
+<?php include("includes/sidebar.php"); ?>
 
 <div id="main-content">
 
-<div class="card shadow">
+    <!-- PAGE HEADER -->
 
-<div class="card-header bg-warning text-dark">
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<h4>
+        <h2 class="page-title mb-0">
+            <i class="bi bi-box-seam"></i>
+            Edit Product
+        </h2>
 
-<i class="bi bi-pencil-square"></i>
+        <a href="products.php" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Back
+        </a>
 
-Edit Product
+    </div>
 
-</h4>
+    <!-- FORM -->
 
-</div>
+    <div class="table-container shadow">
 
-<div class="card-body">
+        <form action="update_product.php" method="POST">
 
-<form action="update_product.php" method="POST">
+            <input
+                type="hidden"
+                name="id"
+                value="<?php echo $row['id']; ?>">
 
-<input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+            <div class="row">
 
-<div class="row">
+                <div class="col-md-6 mb-4">
 
-<div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">
+                        Product Name
+                    </label>
 
-<label>Product Name</label>
+                    <input
+                        type="text"
+                        name="product_name"
+                        class="form-control"
+                        value="<?php echo htmlspecialchars($row['product_name']); ?>"
+                        required>
 
-<input
-type="text"
-name="product_name"
-class="form-control"
-value="<?php echo $row['product_name']; ?>"
-required>
+                </div>
 
-</div>
+                <div class="col-md-6 mb-4">
 
-<div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">
+                        Category
+                    </label>
 
-<label>Category</label>
+                    <input
+                        type="text"
+                        name="category"
+                        class="form-control"
+                        value="<?php echo htmlspecialchars($row['category']); ?>"
+                        required>
 
-<input
-type="text"
-name="category"
-class="form-control"
-value="<?php echo $row['category']; ?>"
-required>
+                </div>
 
-</div>
+                <div class="col-md-6 mb-4">
 
-<div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">
+                        Supplier
+                    </label>
 
-<label>Supplier</label>
+                    <input
+                        type="text"
+                        name="supplier"
+                        class="form-control"
+                        value="<?php echo htmlspecialchars($row['supplier']); ?>"
+                        required>
 
-<input
-type="text"
-name="supplier"
-class="form-control"
-value="<?php echo $row['supplier']; ?>"
-required>
+                </div>
 
-</div>
+                <div class="col-md-6 mb-4">
 
-<div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">
+                        SKU
+                    </label>
 
-<label>SKU</label>
+                    <input
+                        type="text"
+                        name="sku"
+                        class="form-control"
+                        value="<?php echo htmlspecialchars($row['sku']); ?>">
 
-<input
-type="text"
-name="sku"
-class="form-control"
-value="<?php echo $row['sku']; ?>">
+                </div>
 
-</div>
+                <div class="col-md-6 mb-4">
 
-<div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">
+                        Cost Price
+                    </label>
 
-<label>Cost Price</label>
+                    <input
+                        type="number"
+                        step="0.01"
+                        name="cost_price"
+                        class="form-control"
+                        value="<?php echo $row['cost_price']; ?>"
+                        required>
 
-<input
-type="number"
-step="0.01"
-name="cost_price"
-class="form-control"
-value="<?php echo $row['cost_price']; ?>"
-required>
+                </div>
 
-</div>
+                <div class="col-md-6 mb-4">
 
-<div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">
+                        Selling Price
+                    </label>
 
-<label>Selling Price</label>
+                    <input
+                        type="number"
+                        step="0.01"
+                        name="selling_price"
+                        class="form-control"
+                        value="<?php echo $row['selling_price']; ?>"
+                        required>
 
-<input
-type="number"
-step="0.01"
-name="selling_price"
-class="form-control"
-value="<?php echo $row['selling_price']; ?>"
-required>
+                </div>
 
-</div>
+                <div class="col-md-6 mb-4">
 
-<div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">
+                        Quantity
+                    </label>
 
-<label>Quantity</label>
+                    <input
+                        type="number"
+                        name="quantity"
+                        class="form-control"
+                        value="<?php echo $row['quantity']; ?>"
+                        required>
 
-<input
-type="number"
-name="quantity"
-class="form-control"
-value="<?php echo $row['quantity']; ?>"
-required>
+                </div>
 
-</div>
+                <div class="col-md-6 mb-4">
 
-<div class="col-md-6 mb-3">
+                    <label class="form-label fw-semibold">
+                        Unit
+                    </label>
 
-<label>Unit</label>
+                    <select
+                        name="unit"
+                        class="form-select">
 
-<select
-name="unit"
-class="form-select">
+                        <option value="Pieces" <?php if($row['unit']=="Pieces") echo "selected"; ?>>Pieces</option>
+                        <option value="Box" <?php if($row['unit']=="Box") echo "selected"; ?>>Box</option>
+                        <option value="Kg" <?php if($row['unit']=="Kg") echo "selected"; ?>>Kg</option>
+                        <option value="Litre" <?php if($row['unit']=="Litre") echo "selected"; ?>>Litre</option>
 
-<option value="Pieces" <?php if($row['unit']=="Pieces") echo "selected"; ?>>Pieces</option>
+                    </select>
 
-<option value="Box" <?php if($row['unit']=="Box") echo "selected"; ?>>Box</option>
+                </div>
 
-<option value="Kg" <?php if($row['unit']=="Kg") echo "selected"; ?>>Kg</option>
+                <div class="col-12 mb-4">
 
-<option value="Litre" <?php if($row['unit']=="Litre") echo "selected"; ?>>Litre</option>
+                    <label class="form-label fw-semibold">
+                        Description
+                    </label>
 
-</select>
+                    <textarea
+                        name="description"
+                        rows="5"
+                        class="form-control"
+                        required><?php echo htmlspecialchars($row['description']); ?></textarea>
 
-</div>
+                </div>
 
-<div class="col-12 mb-3">
+                <div class="col-12 d-flex gap-2">
 
-<label>Description</label>
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
 
-<textarea
-name="description"
-rows="4"
-class="form-control"><?php echo $row['description']; ?></textarea>
+                        <i class="bi bi-pencil-square"></i>
+                        Update Product
 
-</div>
+                    </button>
 
-<div class="col-12">
+                    <a
+                        href="products.php"
+                        class="btn btn-secondary">
 
-<button
-type="submit"
-class="btn btn-warning">
+                        Cancel
 
-<i class="bi bi-pencil-square"></i>
+                    </a>
 
-Update Product
+                </div>
 
-</button>
+            </div>
 
-<a
-href="products.php"
-class="btn btn-secondary">
+        </form>
 
-Cancel
-
-</a>
-
-</div>
-
-</div>
-
-</form>
-
-</div>
-
-</div>
+    </div>
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/darkmode.js"></script>
 
 </body>
 

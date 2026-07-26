@@ -1,4 +1,8 @@
+
+
 <?php
+
+
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +37,15 @@
 
 <div id="main-content">
 
+<?php if(isset($_GET['error']) && $_GET['error']=="empty"){ ?>
+
+<div class="alert alert-danger alert-dismissible fade show">
+    <i class="bi bi-exclamation-circle-fill"></i>
+    Category Name and Description cannot be empty.
+    <button class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+
+<?php } ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
@@ -126,14 +139,11 @@ Description
 
 
 <textarea
-
 name="description"
-
-class="form-control"
-
 rows="5"
-
-placeholder="Enter Category Description"></textarea>
+class="form-control"
+placeholder="Enter category description"
+required></textarea>
 
 
 </div>

@@ -385,19 +385,58 @@ body{
 
 .low-stock-alert-card{
 
-    background:#fef2f2;
-
-    color:#991b1b;
-
+    background:#fef2f2 !important;
+    border:1px solid #fecaca;
     border-radius:18px;
 
-    border:1px solid #fee2e2;
-
-    padding:25px;
+    color:#991b1b !important;
 
 }
 
+.low-stock-alert-card h6{
 
+    color:#b91c1c !important;
+
+}
+
+.low-stock-alert-card h3{
+
+    color:#111827 !important;
+
+}
+
+.low-stock-alert-card i{
+
+    color:#dc2626 !important;
+
+}
+
+body.dark-mode .low-stock-alert-card{
+
+    background:#2b1f22 !important;
+    border:1px solid #7f1d1d;
+
+    color:#ffffff !important;
+
+}
+
+body.dark-mode .low-stock-alert-card h6{
+
+    color:#fca5a5 !important;
+
+}
+
+body.dark-mode .low-stock-alert-card h3{
+
+    color:#ffffff !important;
+
+}
+
+body.dark-mode .low-stock-alert-card i{
+
+    color:#ef4444 !important;
+
+}
 
 /* =========================
  DARK MODE
@@ -484,12 +523,8 @@ body.dark-mode .table-container{
 
 body.dark-mode h3,
 body.dark-mode h4,
-body.dark-mode h5,
-body.dark-mode h6{
 
-    color:white;
 
-}
 
 
 
@@ -598,4 +633,200 @@ body.dark-mode .form-control::placeholder{
 
     transform:scale(1.08);
 
+}
+
+/* =========================
+   FIX CARD HEADERS (LIGHT MODE)
+========================= */
+
+.card-header{
+
+    background:#ffffff !important;
+    color:#1e293b !important;
+
+}
+
+.card-header h5{
+
+    color:#1e293b !important;
+    font-weight:700;
+
+}
+
+.card-header i{
+
+    color:inherit !important;
+
+}
+
+/* Critical Stock title */
+
+.card-header .text-danger{
+
+    color:#dc3545 !important;
+
+}
+
+/* =========================
+   CARD HEADER DARK MODE
+========================= */
+
+body.dark-mode .card-header{
+
+    background:#1e293b !important;
+    border-color:#334155 !important;
+
+}
+
+body.dark-mode .card-header h5{
+
+    color:#ffffff !important;
+
+}
+
+body.dark-mode .card-header .text-danger{
+
+    color:#ff6b6b !important;
+
+}
+
+.card-body h6{
+
+    color:#1e293b !important;
+
+}
+
+body.dark-mode .card-body h6{
+
+    color:#ffffff !important;
+
+}
+
+/* ===== LIGHT MODE FIX ===== */
+
+.card-body h6{
+    color:#1e293b !important;
+}
+
+.card-body h6 strong{
+    color:#1e293b !important;
+}
+
+.card-body .fw-bold{
+    color:#1e293b !important;
+}
+
+.card-body small{
+    color:#64748b !important;
+}
+
+/* ===== DARK MODE ===== */
+
+body.dark-mode .card-body h6,
+body.dark-mode .card-body h6 strong,
+body.dark-mode .card-body .fw-bold{
+    color:#ffffff !important;
+}
+
+body.dark-mode .card-body small{
+    color:#cbd5e1 !important;
+}
+
+/* ===========================
+   EDIT PRODUCT PAGE
+=========================== */
+
+.card{
+    background:#ffffff;
+    border:1px solid #e2e8f0;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(15,23,42,.06);
+    overflow:hidden;
+}
+
+.card-header{
+    background:#ffffff !important;
+    border-bottom:1px solid #e2e8f0;
+    padding:20px 25px;
+}
+
+.card-header h4{
+    margin:0;
+    font-size:28px;
+    font-weight:600;
+    color:#1e293b;
+}
+
+.card-body{
+    padding:30px;
+}
+
+label{
+    font-weight:500;
+    color:#334155;
+    margin-bottom:8px;
+}
+
+.form-control,
+.form-select{
+    height:50px;
+    border-radius:12px;
+    border:1px solid #cbd5e1;
+    box-shadow:none;
+}
+
+textarea.form-control{
+    height:130px;
+}
+
+.btn-warning{
+    background:#2563eb;
+    border:none;
+    color:#fff;
+    border-radius:10px;
+    padding:10px 22px;
+    font-weight:500;
+}
+
+.btn-warning:hover{
+    background:#1d4ed8;
+    color:#fff;
+}
+
+.btn-secondary{
+    border-radius:10px;
+    padding:10px 22px;
+}
+
+/* Dark Mode */
+
+body.dark-mode .card{
+    background:#1e293b;
+    border-color:#334155;
+}
+
+body.dark-mode .card-header{
+    background:#1e293b !important;
+    border-color:#334155;
+}
+
+body.dark-mode .card-header h4{
+    color:#ffffff;
+}
+
+body.dark-mode label{
+    color:#e2e8f0;
+}
+
+body.dark-mode .form-control,
+body.dark-mode .form-select{
+    background:#0f172a;
+    color:#ffffff;
+    border-color:#475569;
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 .2rem rgba(37,99,235,.15);
 }

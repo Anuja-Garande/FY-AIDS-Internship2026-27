@@ -1,3 +1,17 @@
+<?php if(isset($_GET['error']) && $_GET['error']=="empty"){ ?>
+
+<div class="alert alert-danger alert-dismissible fade show">
+
+    <i class="bi bi-exclamation-circle-fill"></i>
+
+    Category Name and Description cannot be empty.
+
+    <button class="btn-close" data-bs-dismiss="alert"></button>
+
+</div>
+
+<?php } ?>
+
 <?php
 
 $host = "localhost";
@@ -41,181 +55,104 @@ $row = mysqli_fetch_assoc($result);
 <title>Edit Category</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-<style>
-
-:root{
---dark:#0A2540;
---light:#f4f7fb;
-}
-
-body{
-background:var(--light);
-font-family:'Segoe UI',sans-serif;
-}
-
-#sidebar{
-width:260px;
-height:100vh;
-background:#0A2540;
-position:fixed;
-left:0;
-top:0;
-padding:20px;
-}
-
-#sidebar .nav-link{
-color:#d1d5db;
-}
-
-#sidebar .nav-link:hover,
-#sidebar .nav-link.active{
-background:rgba(255,255,255,.1);
-color:white;
-border-left:4px solid #38bdf8;
-}
-
-#main{
-margin-left:260px;
-padding:30px;
-}
-
-.card{
-border:none;
-border-radius:15px;
-}
-
-</style>
+<link rel="stylesheet" href="assets/css/admin.css">
 
 </head>
 
 <body>
 
-<div id="sidebar">
+<?php include("includes/sidebar.php"); ?>
 
-<h3 class="text-white mb-4">
-<i class="bi bi-box-seam"></i>
-IMS Dashboard
-</h3>
+<div id="main-content">
 
-<ul class="nav flex-column">
+    <!-- PAGE HEADER -->
 
-<li>
-<a href="dashboard.php" class="nav-link">
-<i class="bi bi-speedometer2 me-2"></i>
-Dashboard
-</a>
-</li>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<li>
-<a href="categories.php" class="nav-link active">
-<i class="bi bi-tags me-2"></i>
-Category Management
-</a>
-</li>
+        <h2 class="page-title mb-0">
+            <i class="bi bi-tags"></i>
+            Edit Category
+        </h2>
 
-<li>
-<a href="products.php" class="nav-link">
-<i class="bi bi-box me-2"></i>
-Product Management
-</a>
-</li>
+        <a href="categories.php" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Back
+        </a>
 
-</ul>
+    </div>
 
-</div>
+    <!-- FORM CARD -->
 
-<div id="main">
+    <div class="table-container shadow">
 
-<div class="card shadow">
+        <form action="update_category.php" method="POST">
 
-<div class="card-header bg-warning">
+            <input
+                type="hidden"
+                name="id"
+                value="<?php echo $row['id']; ?>">
 
-<h4>
+            <div class="mb-4">
 
-<i class="bi bi-pencil-square"></i>
+                <label class="form-label fw-semibold">
+                    Category Name
+                </label>
 
-Edit Category
+                <input
+                    type="text"
+                    name="category_name"
+                    class="form-control"
+                    value="<?php echo htmlspecialchars($row['category_name']); ?>"
+                    required>
 
-</h4>
+            </div>
 
-</div>
+            <div class="mb-4">
 
-<div class="card-body">
+                <label class="form-label fw-semibold">
+                    Description
+                </label>
 
-<form action="update_category.php" method="POST">
+                <textarea
+    name="description"
+    rows="6"
+    class="form-control"
+    placeholder="Enter category description"
+    required><?php echo htmlspecialchars($row['description']); ?></textarea>
 
-<input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+            </div>
 
-<div class="mb-3">
+            <div class="d-flex gap-2">
 
-<label class="form-label">
+                <button
+                    type="submit"
+                    class="btn btn-primary">
 
-Category Name
+                    <i class="bi bi-pencil-square"></i>
+                    Update Category
 
-</label>
+                </button>
 
-<input
-type="text"
-name="category_name"
-class="form-control"
-value="<?php echo $row['category_name']; ?>"
-required>
+                <a
+                    href="categories.php"
+                    class="btn btn-secondary">
 
-</div>
+                    Cancel
 
-<div class="mb-3">
+                </a>
 
-<label class="form-label">
+            </div>
 
-Description
+        </form>
 
-</label>
-
-<textarea
-name="description"
-rows="5"
-class="form-control"><?php echo $row['description']; ?></textarea>
-
-<textarea
-name="description"
-rows="5"
-class="form-control"><?php echo $row['description']; ?></textarea>
-
-</div>
-
-<div class="d-flex gap-2">
-
-<button
-type="submit"
-class="btn btn-warning">
-
-<i class="bi bi-pencil-square"></i>
-
-Update Category
-
-</button>
-
-<a
-href="categories.php"
-class="btn btn-secondary">
-
-Cancel
-
-</a>
-
-</div>
-
-</form>
-
-</div>
-
-</div>
+    </div>
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/darkmode.js"></script>
 
 </body>
 

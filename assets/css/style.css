@@ -7,42 +7,60 @@
     font-family:'Poppins',sans-serif;
 }
 
-body{
-    background:#f1f5f9;
+html{
+    scroll-behavior:smooth;
 }
 
+body{
+    background:#f8fafc;
+    color:#1e293b;
+    transition:.35s ease;
+}
 
-/* ================= NAVBAR ================= */
+/* ===========================
+NAVBAR
+=========================== */
 
 .navbar{
-    background:#0f172a !important;
+
+    background:#ffffff;
     padding:18px 0;
-    }
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+    transition:.35s;
+
+}
 
 .navbar-brand{
-    color:#38bdf8 !important;
+
     font-size:30px;
     font-weight:700;
+    color:#2563eb !important;
+
 }
 
 .nav-link{
-    color:white !important;
+
+    color:#1e293b !important;
     margin-left:20px;
     font-weight:500;
+    transition:.3s;
+
 }
 
 .nav-link:hover{
-    color:#38bdf8 !important;
-}
 
+    color:#2563eb !important;
+
+}
 
 .login-btn{
 
     background:#2563eb;
-    color:white !important;
+    color:#fff !important;
     border-radius:50px;
-    padding:10px 25px;
+    padding:10px 24px;
     font-weight:600;
+    border:none;
 
 }
 
@@ -52,190 +70,312 @@ body{
 
 }
 
-
-
-/* ================= HERO SECTION ================= */
-
+/* ===========================
+HERO
+=========================== */
 
 .hero{
 
-    padding:120px 0 100px;
-    
+    padding:140px 0 100px;
+
     background:
     linear-gradient(
-    135deg,
-    #0f172a,
-    #2563eb
+        135deg,
+        #60a5fa,
+        #2563eb
     );
 
-    color:white;
+    color:#fff;
 
 }
 
-
 .hero h1{
 
-    font-size:55px;
+    font-size:56px;
     font-weight:700;
     line-height:1.2;
 
 }
 
-
 .hero p{
 
-    font-size:20px;
     margin-top:20px;
+    font-size:20px;
     line-height:1.8;
     color:#e2e8f0;
 
 }
 
-
 .hero-image{
 
     width:100%;
     max-width:500px;
-
     animation:float 3s infinite ease-in-out;
 
 }
 
-
 @keyframes float{
 
-    0%{
-transform:translateY(0);
-    }
+0%{
 
-    50%{
+transform:translateY(0);
+
+}
+
+50%{
+
 transform:translateY(-15px);
-    }
 
-    100%{
+}
+
+100%{
+
 transform:translateY(0);
-    }
 
 }
 
-
-
-
-/* ================= FEATURES ================= */
-
-
-.features{
-
-    padding:80px 0;
-
 }
 
+/* Floating Counter Cards */
 
-.feature-box{
+.floating-card{
 
-    background:white;
-
-    padding:35px;
-
+    background:#fff;
     border-radius:20px;
-
+    padding:25px;
     text-align:center;
-
-    box-shadow:
-0 10px 30px rgba(15,23,42,.12);
-
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
     transition:.3s;
 
 }
 
+.floating-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.floating-card h2{
+
+    color:#2563eb;
+    font-size:40px;
+    font-weight:700;
+
+}
+
+.floating-card p{
+
+    margin:0;
+    color:#64748b;
+
+}
+
+/* ===========================
+FEATURES
+=========================== */
+
+.features{
+
+    padding:90px 0;
+    background:#f8fafc;
+
+}
+
+.feature-box{
+
+    background:#ffffff;
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(15,23,42,.10);
+    transition:.35s;
+
+}
 
 .feature-box:hover{
 
     transform:translateY(-10px);
-
-    box-shadow:
-0 20px 40px rgba(37,99,235,.2);
+    box-shadow:0 20px 40px rgba(37,99,235,.20);
 
 }
-
 
 .feature-box i{
 
     font-size:50px;
-
     color:#2563eb;
-
     margin-bottom:20px;
 
 }
 
+.feature-box h4{
 
+    font-weight:600;
+    margin-bottom:15px;
 
-/* ================= FOOTER ================= */
-
-
-footer{
-    
-    background:#020617;
-
-    color:white;
-
-    padding:25px;
-
-    text-align:center;
-    
 }
 
+.feature-box p{
 
-
-/* ================= LOGIN PAGE ================= */
-
-
-.login-body{
-
-    background:
-linear-gradient(
-135deg,
-    #0f172a,
-    #2563eb
-);
-
-    height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-    
-}
-
-
-
-.login-card{
-
-    width:420px;
-
-    background:white;
-
-    padding:40px;
-
-    border-radius:20px;
-
-    box-shadow:
-0 20px 50px rgba(0,0,0,.3);
+    color:#64748b;
+    margin-bottom:0;
 
 }
 
 
-.login-card h2{
+/* ===========================
+ABOUT
+=========================== */
 
-    color:#2563eb;
+#about{
+
+    background:#ffffff;
+    padding:90px 0;
+
+}
+
+#about h2{
 
     font-weight:700;
 
 }
 
+#about .lead{
+
+    color:#475569;
+
+}
+
+
+/* ===========================
+LATEST PRODUCTS
+=========================== */
+
+.latest-products{
+
+    background:#f8fafc;
+    padding:90px 0;
+
+}
+
+
+/* ===========================
+CONTACT
+=========================== */
+
+#contact{
+
+    background:#ffffff;
+    padding:90px 0;
+
+}
+
+
+/* ===========================
+FORMS
+=========================== */
+
+.form-control{
+
+    height:50px;
+    border-radius:12px;
+    border:1px solid #d1d5db;
+
+}
+
+.form-control:focus{
+
+    border-color:#2563eb;
+    box-shadow:0 0 0 .2rem rgba(37,99,235,.15);
+
+}
+
+textarea.form-control{
+
+    height:auto;
+
+}
+
+
+/* ===========================
+BUTTONS
+=========================== */
+
+.btn-primary{
+
+    background:#2563eb;
+    border:none;
+
+}
+
+.btn-primary:hover{
+
+    background:#1d4ed8;
+
+}
+
+.btn-success{
+
+    border-radius:12px;
+
+}
+
+.btn-outline-light{
+
+    border-radius:12px;
+
+}
+
+
+/* ===========================
+FOOTER
+=========================== */
+
+footer{
+
+    background:#0f172a;
+    color:#ffffff;
+    padding:25px;
+    text-align:center;
+
+}
+
+
+/* ===========================
+LOGIN PAGE
+=========================== */
+
+.login-body{
+
+    background:
+    linear-gradient(
+        135deg,
+        #0f172a,
+        #2563eb
+    );
+
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.login-card{
+
+    width:420px;
+    background:#ffffff;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 20px 50px rgba(0,0,0,.30);
+
+}
+
+.login-card h2{
+
+    color:#2563eb;
+    font-weight:700;
+
+}
 
 .login-card p{
 
@@ -243,41 +383,24 @@ linear-gradient(
 
 }
 
-
 .input-group-text{
 
     background:#2563eb;
-
-    color:white;
-
+    color:#ffffff;
     border:none;
 
 }
-
-
-.form-control{
-
-    height:50px;
-    
-}
-
 
 .login-card button{
 
     height:50px;
-
     background:#2563eb;
-
     border:none;
-
     font-size:18px;
-
     font-weight:600;
+    border-radius:12px;
 
-    border-radius:10px;
-    
 }
-
 
 .login-card button:hover{
 
@@ -285,36 +408,51 @@ linear-gradient(
 
 }
 
-
 .login-card a{
 
     color:#2563eb;
-
     text-decoration:none;
-
     font-weight:600;
 
 }
 
-/* Theme Transition */
+/* ==========================================
+   THEME TRANSITION
+========================================== */
 
 body,
 .navbar,
-.feature-box,
 .hero,
-section,
-footer{
-    transition: all .35s ease;
+.features,
+#about,
+.latest-products,
+#contact,
+.feature-box,
+footer,
+.form-control,
+.nav-link,
+.navbar-brand,
+.btn,
+.floating-card{
+
+    transition:all .35s ease;
+
 }
 
-/* Dark Mode */
+
+/* ==========================================
+   DARK MODE
+========================================== */
 
 body.dark-mode{
 
     background:#0f172a;
-color:#fff;
+    color:#e2e8f0;
 
 }
+
+
+/* Navbar */
 
 body.dark-mode .navbar{
 
@@ -322,264 +460,165 @@ body.dark-mode .navbar{
 
 }
 
-body.dark-mode .feature-box{
+body.dark-mode .navbar-brand{
 
-    background:#1e293b;
-    color:white;
-border:1px solid #334155;
+    color:#38bdf8 !important;
 
 }
 
-body.dark-mode .feature-box p{
+body.dark-mode .nav-link{
+
+    color:#ffffff !important;
+
+}
+
+body.dark-mode .nav-link:hover{
+
+    color:#38bdf8 !important;
+
+}
+
+body.dark-mode #themeToggle{
+
+    border-color:#38bdf8;
+    color:#38bdf8;
+
+}
+
+
+/* Hero */
+
+body.dark-mode .hero{
+
+    background:
+    linear-gradient(
+        135deg,
+        #0f172a,
+        #1e40af
+    );
+
+}
+
+
+/* Sections */
+
+body.dark-mode .features,
+body.dark-mode .latest-products{
+
+    background:#111827;
+
+}
+
+body.dark-mode #about,
+body.dark-mode #contact{
+
+    background:#0f172a;
+
+}
+
+
+/* Cards */
+
+body.dark-mode .feature-box,
+body.dark-mode .floating-card{
+
+    background:#1e293b;
+    color:#f8fafc;
+    border:1px solid #334155;
+
+}
+
+body.dark-mode .feature-box h4,
+body.dark-mode .feature-box h2,
+body.dark-mode .floating-card h2{
+
+    color:#ffffff;
+
+}
+
+body.dark-mode .feature-box p,
+body.dark-mode .floating-card p{
 
     color:#cbd5e1;
 
 }
+
+
+/* Forms */
+
+body.dark-mode .form-control{
+
+    background:#1e293b;
+    color:#ffffff;
+    border:1px solid #475569;
+
+}
+
+body.dark-mode .form-control::placeholder{
+
+    color:#94a3b8;
+
+}
+
+body.dark-mode .form-control:focus{
+
+    background:#1e293b;
+    color:#ffffff;
+    border-color:#3b82f6;
+    box-shadow:0 0 0 .2rem rgba(59,130,246,.20);
+
+}
+
+
+/* Buttons */
+
+body.dark-mode .btn-primary{
+
+    background:#2563eb;
+    border-color:#2563eb;
+
+}
+
+body.dark-mode .btn-primary:hover{
+
+    background:#1d4ed8;
+
+}
+
+body.dark-mode .btn-outline-light{
+
+    color:#ffffff;
+    border-color:#ffffff;
+
+}
+
+
+/* Footer */
 
 body.dark-mode footer{
 
-    background:#111827;
-    color:white;
-    
-}
-
-body.dark-mode #about{
-
-    background:#1e293b !important;
-    color:white;
-
-}
-
-body.dark-mode .latest-products{
-
-    background:#0f172a;
-}
-
-body.dark-mode .recent-sales{
-
-    background:#1e293b !important;
-}
-
-/* =========================
-   DARK MODE
-========================= */
-
-
-body.dark-mode{
-
-    background:#0f172a;
-    color:#e2e8f0;
+    background:#020617;
+    color:#ffffff;
 
 }
 
 
-/* Sidebar */
+/* Bootstrap Text */
 
-body.dark-mode #sidebar{
+body.dark-mode .text-muted{
 
-    background:#111827;
-    border-color:#334155;
-
-}
-
-
-body.dark-mode #sidebar .brand{
-
-    color:white;
+    color:#94a3b8 !important;
 
 }
 
+body.dark-mode .text-success{
 
-body.dark-mode #sidebar ul li a{
-
-    color:#cbd5e1;
-
-}
-
-
-body.dark-mode #sidebar ul li a:hover,
-body.dark-mode #sidebar ul li a.active{
-
-    background:#2563eb;
-    color:white;
+    color:#4ade80 !important;
 
 }
 
+body.dark-mode .badge{
 
-/* Main Area */
-
-body.dark-mode #main-content{
-
-    background:#0f172a;
-
-}
-
-
-/* Cards */
-
-body.dark-mode .card-box,
-body.dark-mode .card-counter,
-body.dark-mode .card{
-
-    background:#1e293b;
-    color:#f8fafc;
-    border-color:#334155;
-
-}
-
-
-body.dark-mode .card h3,
-body.dark-mode .card h6{
-
-    color:#f8fafc;
-
-}
-
-
-/* Tables */
-
-body.dark-mode .table-container{
-
-    background:#1e293b;
-    border-color:#334155;
-
-}
-
-
-body.dark-mode table{
-
-    color:#e2e8f0 !important;
-
-}
-
-
-body.dark-mode .table tbody tr:hover{
-
-    background:#334155;
-
-}
-
-
-/* Inputs */
-
-body.dark-mode input,
-body.dark-mode select,
-body.dark-mode textarea{
-
-    background:#1e293b;
-    color:white;
-    border-color:#475569;
-
-}
-
-/* =========================
-   DARK MODE
-========================= */
-
-
-body.dark-mode{
-
-    background:#0f172a;
-    color:#e2e8f0;
-
-}
-
-
-/* Sidebar */
-
-body.dark-mode #sidebar{
-
-    background:#111827;
-    border-color:#334155;
-
-}
-
-
-body.dark-mode #sidebar .brand{
-
-    color:white;
-
-}
-
-
-body.dark-mode #sidebar ul li a{
-
-    color:#cbd5e1;
-
-}
-
-
-body.dark-mode #sidebar ul li a:hover,
-body.dark-mode #sidebar ul li a.active{
-
-    background:#2563eb;
-    color:white;
-
-}
-
-
-/* Main Area */
-
-body.dark-mode #main-content{
-
-    background:#0f172a;
-
-}
-
-
-/* Cards */
-
-body.dark-mode .card-box,
-body.dark-mode .card-counter,
-body.dark-mode .card{
-
-    background:#1e293b;
-    color:#f8fafc;
-    border-color:#334155;
-
-}
-
-
-body.dark-mode .card h3,
-body.dark-mode .card h6{
-
-    color:#f8fafc;
-
-}
-
-
-/* Tables */
-
-body.dark-mode .table-container{
-
-    background:#1e293b;
-    border-color:#334155;
-
-}
-
-
-body.dark-mode table{
-
-    color:#e2e8f0 !important;
-
-}
-
-
-body.dark-mode .table tbody tr:hover{
-
-    background:#334155;
-
-}
-
-
-/* Inputs */
-
-body.dark-mode input,
-body.dark-mode select,
-body.dark-mode textarea{
-
-    background:#1e293b;
-    color:white;
-    border-color:#475569;
+    color:#111827;
 
 }

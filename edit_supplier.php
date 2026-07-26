@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['username'])){
+    header("Location: login.php");
+    exit();
+}
 
 $host = "localhost";
 $user = "root";
@@ -7,28 +13,27 @@ $database = "inventory_management";
 
 $conn = mysqli_connect($host, $user, $password, $database);
 
-if (!$conn) {
+if(!$conn){
     die("Connection Failed: " . mysqli_connect_error());
 }
 
-if (!isset($_GET['id'])) {
+if(!isset($_GET['id'])){
     header("Location: suppliers.php");
     exit();
 }
 
 $id = intval($_GET['id']);
 
-$sql = "SELECT * FROM suppliers WHERE id=$id";
-$result = mysqli_query($conn, $sql);
+$result = mysqli_query($conn,"SELECT * FROM suppliers WHERE id='$id'");
 
-if (mysqli_num_rows($result) == 0) {
+if(mysqli_num_rows($result)==0){
     header("Location: suppliers.php");
     exit();
 }
 
 $row = mysqli_fetch_assoc($result);
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,59 +45,39 @@ $row = mysqli_fetch_assoc($result);
 <title>Edit Supplier</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
-
-<style>
-
-:root{
---dark:#0A2540;
---light:#f4f7fb;
-}
-
-body{
-background:var(--light);
-font-family:'Segoe UI',sans-serif;
-}
-
-#sidebar{
-width:260px;
-height:100vh;
-background:#0A2540;
-position:fixed;
-left:0;
-top:0;
-padding:20px;
-}
-
-#main{
-margin-left:260px;
-padding:30px;
-}
-
-.card{
-border:none;
-border-radius:15px;
-}
-
-</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="stylesheet" href="assets/css/admin.css">
 
 </head>
 
 <body>
 
-<div id="main">
+<?php include("includes/sidebar.php"); ?>
 
-<div class="card shadow">
+<div id="main-content">
 
-<div class="card-header bg-success text-white">
+<div class="d-flex justify-content-between align-items-center mb-4">
 
-<h4>
-
-<i class="bi bi-pencil-square"></i>
-
+<h2 class="page-title mb-0">
+<i class="bi bi-truck"></i>
 Edit Supplier
+</h2>
 
-</h4>
+<a href="suppliers.php" class="btn btn-secondary">
+<i class="bi bi-arrow-left"></i>
+Back
+</a>
+
+</div>
+
+<div class="card table-container shadow">
+
+<div class="card-header">
+
+<h5 class="mb-0">
+<i class="bi bi-pencil-square text-primary"></i>
+Update Supplier Information
+</h5>
 
 </div>
 
@@ -102,79 +87,71 @@ Edit Supplier
 
 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
 
-<div class="mb-3">
+<div class="row">
 
+<div class="col-md-6 mb-3">
 <label class="form-label">Supplier Name</label>
-
 <input
 type="text"
 name="supplier_name"
 class="form-control"
-value="<?php echo $row['supplier_name']; ?>"
+value="<?php echo htmlspecialchars($row['supplier_name']); ?>"
 required>
-
 </div>
 
-<div class="mb-3">
-
+<div class="col-md-6 mb-3">
 <label class="form-label">Contact Person</label>
-
 <input
 type="text"
 name="contact_person"
 class="form-control"
-value="<?php echo $row['contact_person']; ?>">
-
+value="<?php echo htmlspecialchars($row['contact_person']); ?>"
+required>
 </div>
 
-<div class="mb-3">
-
-<label class="form-label">Phone</label>
-
+<div class="col-md-6 mb-3">
+<label class="form-label">Phone Number</label>
 <input
 type="text"
 name="phone"
 class="form-control"
-value="<?php echo $row['phone']; ?>">
-
+value="<?php echo htmlspecialchars($row['phone']); ?>"
+required>
 </div>
 
-<div class="mb-3">
-
-<label class="form-label">Email</label>
-
+<div class="col-md-6 mb-3">
+<label class="form-label">Email Address</label>
 <input
 type="email"
 name="email"
 class="form-control"
-value="<?php echo $row['email']; ?>">
-
+value="<?php echo htmlspecialchars($row['email']); ?>"
+required>
 </div>
 
-<div class="mb-3">
-
+<div class="col-12 mb-3">
 <label class="form-label">Address</label>
-
 <textarea
 name="address"
 rows="4"
-class="form-control"><?php echo $row['address']; ?></textarea>
-
+class="form-control"
+required><?php echo htmlspecialchars($row['address']); ?></textarea>
 </div>
 
-<button class="btn btn-success">
+<div class="col-12 d-flex gap-2">
 
+<button type="submit" class="btn btn-primary">
 <i class="bi bi-check-circle"></i>
-
 Update Supplier
-
 </button>
 
 <a href="suppliers.php" class="btn btn-secondary">
-
 Cancel
-
 </a>
+
+</div>
+
+</div>
 
 </form>
 
@@ -185,6 +162,11 @@ Cancel
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/darkmode.js"></script>
 
 </body>
 </html>
+
+<?php
+mysqli_close($conn);
+?>

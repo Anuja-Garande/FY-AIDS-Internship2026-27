@@ -135,20 +135,19 @@ if(!isset($_SESSION['username']))
 <!-- ALERTS -->
 
 
+<?php if(isset($_GET['added'])){ ?>
 
 <div class="alert alert-success alert-dismissible fade show">
 
+    <i class="bi bi-check-circle"></i>
 
-<i class="bi bi-check-circle"></i>
+    Sale Added Successfully.
 
-
-Sale Added Successfully.
-
-
-<button class="btn-close" data-bs-dismiss="alert"></button>
-
+    <button class="btn-close" data-bs-dismiss="alert"></button>
 
 </div>
+
+<?php } ?>
 
 
 

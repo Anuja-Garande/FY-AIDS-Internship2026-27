@@ -738,31 +738,9 @@ No Recent Operations Found
 
 
 
-<!-- CRITICAL STOCK -->
 
 
-<div class="col-lg-4">
 
-
-<div class="card shadow-sm border-0">
-
-
-<div class="card-header bg-white">
-
-
-<h5 class="fw-bold mb-0 text-danger">
-
-
-<i class="bi bi-bell"></i>
-
-
-Critical Stock
-
-
-</h5>
-
-
-</div>
 
 
 
@@ -914,3 +892,4 @@ No Low Stock Products
 
 
 </html>
+

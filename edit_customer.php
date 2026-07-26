@@ -41,246 +41,133 @@ $row = mysqli_fetch_assoc($result);
 <title>Edit Customer</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-<style>
-
-:root{
---dark:#0A2540;
---light:#f4f7fb;
-}
-
-body{
-background:var(--light);
-font-family:'Segoe UI',sans-serif;
-}
-
-#sidebar{
-width:260px;
-height:100vh;
-background:#0A2540;
-position:fixed;
-left:0;
-top:0;
-padding:20px;
-}
-
-#main{
-margin-left:260px;
-padding:30px;
-}
-
-.card{
-border:none;
-border-radius:15px;
-}
-
-</style>
+<link rel="stylesheet" href="assets/css/admin.css">
 
 </head>
 
 <body>
 
-<div id="sidebar">
+<?php include("includes/sidebar.php"); ?>
 
-<div id="sidebar" class="d-flex flex-column p-3 text-white">
+<div id="main-content">
 
-    <a href="dashboard.php" class="d-flex align-items-center mb-4 me-md-auto text-white text-decoration-none">
-        <i class="bi bi-box-seam fs-4 me-2 text-info"></i>
-        <span class="fs-5 fw-bold">IMS Dashboard</span>
-    </a>
+    <!-- PAGE HEADER -->
 
-    <hr style="background-color:#38bdf8; opacity:.3;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-    <ul class="nav nav-pills flex-column mb-auto">
+        <h2 class="page-title mb-0">
+            <i class="bi bi-people"></i>
+            Edit Customer
+        </h2>
 
-        <li class="nav-item">
-            <a href="dashboard.php" class="nav-link">
-                <i class="bi bi-speedometer2 me-2"></i>
-                Dashboard
-            </a>
-        </li>
-
-        <li>
-            <a href="products.php" class="nav-link">
-                <i class="bi bi-box me-2"></i>
-                Product Management
-            </a>
-        </li>
-
-        <li>
-            <a href="categories.php" class="nav-link">
-                <i class="bi bi-tags me-2"></i>
-                Category Management
-            </a>
-        </li>
-
-        <li>
-            <a href="suppliers.php" class="nav-link active">
-                <i class="bi bi-truck me-2"></i>
-                Supplier Management
-            </a>
-        </li>
-
-        <li>
-            <a href="#" class="nav-link">
-                <i class="bi bi-people me-2"></i>
-                Customer Management
-            </a>
-        </li>
-
-        <li>
-            <a href="#" class="nav-link">
-                <i class="bi bi-cart-plus me-2"></i>
-                Purchase Management
-            </a>
-        </li>
-
-        <li>
-            <a href="#" class="nav-link">
-                <i class="bi bi-cash-coin me-2"></i>
-                Sales Management
-            </a>
-        </li>
-
-        <li>
-            <a href="#" class="nav-link">
-                <i class="bi bi-journal-text me-2"></i>
-                Reports
-            </a>
-        </li>
-
-    </ul>
-
-    <hr style="background-color:#38bdf8; opacity:.3;">
-
-    <div class="dropdown">
-
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-
-            <i class="bi bi-person-circle fs-5 me-2 text-info"></i>
-
-            <strong>Mayank Upadhyay</strong>
-
+        <a href="customers.php" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i>
+            Back
         </a>
 
-        <ul class="dropdown-menu dropdown-menu-dark shadow">
+    </div>
 
-            <li>
-                <a class="dropdown-item" href="login.php">
-                    <i class="bi bi-box-arrow-right me-2"></i>
-                    Logout
+    <!-- FORM CARD -->
+
+    <div class="table-container shadow">
+
+        <form action="update_customer.php" method="POST">
+
+            <input
+                type="hidden"
+                name="id"
+                value="<?php echo $row['id']; ?>">
+
+            <div class="mb-4">
+
+                <label class="form-label fw-semibold">
+                    Customer Name
+                </label>
+
+                <input
+                    type="text"
+                    name="customer_name"
+                    class="form-control"
+                    value="<?php echo htmlspecialchars($row['customer_name']); ?>"
+                    required>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label fw-semibold">
+                    Phone Number
+                </label>
+
+                <input
+                    type="text"
+                    name="phone"
+                    class="form-control"
+                    value="<?php echo htmlspecialchars($row['phone']); ?>"
+                    required>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label fw-semibold">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    class="form-control"
+                    value="<?php echo htmlspecialchars($row['email']); ?>"
+                    required>
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label fw-semibold">
+                    Address
+                </label>
+
+                <textarea
+                    name="address"
+                    rows="5"
+                    class="form-control"
+                    required><?php echo htmlspecialchars($row['address']); ?></textarea>
+
+            </div>
+
+            <div class="d-flex gap-2">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    <i class="bi bi-pencil-square"></i>
+                    Update Customer
+
+                </button>
+
+                <a
+                    href="customers.php"
+                    class="btn btn-secondary">
+
+                    Cancel
+
                 </a>
-            </li>
 
-        </ul>
+            </div>
+
+        </form>
 
     </div>
 
 </div>
 
-</div>
-
-<div id="main">
-
-<div class="card shadow">
-
-<div class="card-header bg-success text-white">
-
-<h4>
-
-<i class="bi bi-pencil-square"></i>
-
-Edit Customer
-
-</h4>
-
-</div>
-
-<div class="card-body">
-
-<form action="update_customer.php" method="POST">
-
-<input
-type="hidden"
-name="id"
-value="<?php echo $row['id']; ?>">
-
-<div class="mb-3">
-
-<label class="form-label">Customer Name</label>
-
-<input
-type="text"
-name="customer_name"
-class="form-control"
-value="<?php echo htmlspecialchars($row['customer_name']); ?>"
-required>
-
-</div>
-
-<div class="mb-3">
-
-<label class="form-label">Phone Number</label>
-
-<input
-type="text"
-name="phone"
-class="form-control"
-value="<?php echo htmlspecialchars($row['phone']); ?>">
-
-</div>
-
-<div class="mb-3">
-
-<label class="form-label">Email Address</label>
-
-<input
-type="email"
-name="email"
-class="form-control"
-value="<?php echo htmlspecialchars($row['email']); ?>">
-
-</div>
-
-<div class="mb-3">
-
-<label class="form-label">Address</label>
-
-<textarea
-name="address"
-rows="4"
-class="form-control"><?php echo htmlspecialchars($row['address']); ?></textarea>
-
-</div>
-
-<button
-type="submit"
-class="btn btn-success">
-
-<i class="bi bi-check-circle"></i>
-
-Update Customer
-
-</button>
-
-<a
-href="customers.php"
-class="btn btn-secondary">
-
-Cancel
-
-</a>
-
-</form>
-
-</div>
-
-</div>
-
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/darkmode.js"></script>
 
 </body>
 

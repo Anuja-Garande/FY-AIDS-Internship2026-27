@@ -1,4 +1,21 @@
+
+
 <?php
+
+$conn = mysqli_connect("localhost","root","","inventory_management");
+
+if(!$conn){
+    die("Connection Failed : ".mysqli_connect_error());
+}
+
+$category_name = trim($_POST['category_name']);
+$description   = trim($_POST['description']);
+
+if($category_name=="" || $description=="")
+{
+    header("Location:add_category.php?error=empty");
+    exit();
+}
 
 // Database Connection
 $host = "localhost";
