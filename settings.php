@@ -444,20 +444,22 @@ href="assets/css/admin.css">
 
             <div class="col-md-8">
 
-                <h5>Change Password</h5>
+    <h5 class="security-title">
+        Change Password
+    </h5>
 
-                <p class="text-muted mb-0">
-                    Keep your account secure by changing your password regularly.
-                </p>
+    <p class="security-text mb-0">
+        Keep your account secure by changing your password regularly.
+    </p>
 
-            </div>
+</div>
 
             <div class="col-md-4 text-md-end">
 
                 <a href="change_password.php"
                 class="btn btn-warning">
 
-                    <i class="bi bi-key-fill"></i>
+                    <i class="bi bi-    y-fill"></i>
 
                     Change Password
 
@@ -663,7 +665,7 @@ href="assets/css/admin.css">
 
         <hr>
 
-        <p class="text-muted mb-0">
+        <p class="mb-0">
             InventoryPro is a web-based inventory and stock management system designed to simplify product, customer, supplier, purchase, and sales management through an intuitive dashboard and modern interface.
         </p>
 
