@@ -1,0 +1,639 @@
+/* ===================================
+   Google Font
+=================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ===================================
+   Reset CSS
+=================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+}
+
+/* ===================================
+   Navbar
+=================================== */
+
+.navbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 8%;
+
+    background:#ffffff;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+}
+
+/* Logo */
+
+.logo h2{
+
+    color:#0f766e;
+
+    font-size:28px;
+
+}
+
+/* Menu */
+
+.nav-links{
+
+    display:flex;
+
+    list-style:none;
+
+    gap:35px;
+
+}
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:#333;
+
+    font-weight:500;
+
+    transition:.3s;
+
+}
+
+.nav-links a:hover{
+
+    color:#0f766e;
+
+}
+
+/* Buttons */
+
+.nav-buttons{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+.nav-buttons a{
+
+    text-decoration:none;
+
+    padding:10px 18px;
+
+    border-radius:6px;
+
+    font-size:15px;
+
+}
+
+.login-btn{
+
+    color:#0f766e;
+
+    border:2px solid #0f766e;
+
+}
+
+.register-btn{
+
+    background:#0f766e;
+
+    color:white;
+
+}
+
+.book-btn{
+
+    background:#f59e0b;
+
+    color:white;
+
+}
+/* ===================================
+   Hero Section
+=================================== */
+
+.hero{
+    height:90vh;
+    background:
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+    url("../images/banner/hotel-banner.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+    color:#fff;
+}
+
+.hero-content{
+    width:70%;
+}
+
+.hero h3{
+    font-size:28px;
+    color:#fbbf24;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:60px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:18px;
+    line-height:1.8;
+    margin-bottom:35px;
+}
+
+.hero-buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+.btn-primary,
+.btn-secondary{
+
+    text-decoration:none;
+
+    padding:15px 35px;
+
+    border-radius:8px;
+
+    font-weight:600;
+}
+
+.btn-primary{
+    background:#f59e0b;
+    color:white;
+}
+
+.btn-secondary{
+    background:#0f766e;
+    color:white;
+}
+/* ===================================
+   About Section
+=================================== */
+
+.about{
+    padding:80px 10%;
+}
+
+.about-container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:50px;
+}
+
+.about-image{
+    flex:1;
+}
+
+.about-image img{
+    width:100%;
+    border-radius:15px;
+}
+
+.about-content{
+    flex:1;
+}
+
+.about-content h4{
+    color:#0f766e;
+    margin-bottom:10px;
+}
+
+.about-content h2{
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+.about-content p{
+    color:#555;
+    line-height:1.8;
+    margin-bottom:20px;
+}
+
+.about-content ul{
+    list-style:none;
+    margin-bottom:30px;
+}
+
+.about-content ul li{
+    margin-bottom:10px;
+    font-size:17px;
+}
+
+.about-btn{
+    background:#0f766e;
+    color:#fff;
+    text-decoration:none;
+    padding:12px 25px;
+    border-radius:8px;
+}
+/* ===================================
+   Featured Rooms
+=================================== */
+
+.featured-rooms{
+    padding:80px 10%;
+    background:#f8f9fa;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.section-title h4{
+    color:#0f766e;
+    margin-bottom:10px;
+}
+
+.section-title h2{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.section-title p{
+    color:#666;
+}
+
+.room-container{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.room-card{
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.room-card:hover{
+    transform:translateY(-10px);
+}
+
+.room-card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+}
+
+.room-content{
+    padding:20px;
+}
+
+.room-content h3{
+    margin-bottom:10px;
+}
+
+.room-content p{
+    color:#666;
+    margin-bottom:20px;
+}
+
+.room-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.room-footer span{
+    color:#0f766e;
+    font-weight:600;
+}
+
+.room-footer a{
+    background:#0f766e;
+    color:white;
+    text-decoration:none;
+    padding:10px 18px;
+    border-radius:6px;
+}
+.room-container{
+    display:grid !important;
+    grid-template-columns:repeat(3,1fr) !important;
+    gap:30px !important;
+}
+/* ===================================
+   Hotel Services
+=================================== */
+
+.services{
+    padding:80px 10%;
+    background:#ffffff;
+}
+
+.service-container{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+    margin-top:50px;
+}
+
+.service-card{
+    background:#ffffff;
+    padding:35px 25px;
+    text-align:center;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    transition:.3s;
+    cursor:pointer;
+}
+
+.service-card:hover{
+    transform:translateY(-10px);
+    background:#0f766e;
+    color:#ffffff;
+}
+
+.service-icon{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.service-card h3{
+    margin-bottom:15px;
+    font-size:24px;
+}
+
+.service-card p{
+    line-height:1.7;
+    color:#666;
+}
+
+.service-card:hover p{
+    color:#ffffff;
+}
+/* ===================================
+   Why Choose Us
+=================================== */
+
+.why-us{
+    padding:80px 10%;
+    background:#ffffff;
+}
+
+.why-container{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+    margin-top:50px;
+}
+
+.why-card{
+    background:#f8f9fa;
+    padding:35px 25px;
+    text-align:center;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.why-card:hover{
+    background:#0f766e;
+    color:#fff;
+    transform:translateY(-10px);
+}
+
+.why-card h3{
+    margin-bottom:15px;
+    font-size:24px;
+}
+
+.why-card p{
+    line-height:1.7;
+    color:#666;
+}
+
+.why-card:hover p{
+    color:#fff;
+}
+/* ===================================
+   Testimonials
+=================================== */
+
+.testimonials{
+    padding:80px 10%;
+    background:#f8f9fa;
+}
+
+.testimonial-container{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:35px;
+    margin-top:50px;
+    align-items:stretch;
+
+}
+
+.testimonial-card{
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    text-align:center;
+    transition:.3s;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+
+    min-height:260px;
+}
+
+.testimonial-card p{
+    color:#555;
+    line-height:1.7;
+    font-size:17px;
+    margin-bottom:20px;
+
+
+}
+
+.testimonial-card h3{
+    color:#f59e0b;
+    margin:20px 0 15px;
+    font-size:24px;
+
+}
+
+.testimonial-card h4{
+    color:#0f766e;
+}
+.testimonial-card{
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    text-align:center;
+    transition:.3s;
+
+    min-height:300px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+.testimonial-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+/* ===================================
+   Gallery
+=================================== */
+
+.gallery{
+    padding:80px 10%;
+    background:#ffffff;
+}
+
+.gallery-container{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+    margin-top:50px;
+}
+
+.gallery-item{
+    overflow:hidden;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.gallery-item img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    transition:.4s;
+    display:block;
+}
+
+.gallery-item:hover img{
+    transform:scale(1.08);
+}
+/* ===================================
+   Contact Banner
+=================================== */
+
+.contact-banner{
+    padding:80px 10%;
+    background:linear-gradient(rgba(15,118,110,.85),rgba(15,118,110,.85)),
+    url("../images/banner/hotel-banner.jpg");
+    background-size:cover;
+    background-position:center;
+    text-align:center;
+    color:#fff;
+}
+
+.contact-content h2{
+    font-size:45px;
+    margin-bottom:20px;
+}
+
+.contact-content p{
+    font-size:18px;
+    margin-bottom:35px;
+}
+
+.contact-btn{
+    display:inline-block;
+    text-decoration:none;
+    background:#f59e0b;
+    color:#fff;
+    padding:15px 35px;
+    border-radius:8px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.contact-btn:hover{
+    background:#d97706;
+}
+/* ===================================
+   Footer
+=================================== */
+
+.footer{
+    background:#0f172a;
+    color:#ffffff;
+    padding:70px 10% 20px;
+}
+
+.footer-container{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:40px;
+    margin-bottom:40px;
+}
+
+.footer-box h2,
+.footer-box h3{
+    margin-bottom:20px;
+}
+
+.footer-box p{
+    color:#cbd5e1;
+    line-height:1.8;
+}
+
+.footer-box ul{
+    list-style:none;
+}
+
+.footer-box ul li{
+    margin-bottom:12px;
+}
+
+.footer-box ul li a{
+    color:#cbd5e1;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.footer-box ul li a:hover{
+    color:#f59e0b;
+}
+
+.footer-bottom{
+    border-top:1px solid rgba(255,255,255,.15);
+    padding-top:20px;
+    text-align:center;
+}
+
+.footer-bottom p{
+    color:#cbd5e1;
+}
