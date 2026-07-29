@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+
+include "../includes/db_connect.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,6 +45,12 @@
         </li>
 
         <li>
+    <a href="borrow_books.php">
+        <i class="fa-solid fa-book-open-reader"></i> Borrow Books
+    </a>
+</li>
+
+        <li>
             <a href="borrowed_books.php">
                 <i class="fa-solid fa-book-open-reader"></i> Borrowed Books
             </a>
@@ -45,12 +59,6 @@
         <li>
             <a href="profile.php">
                 <i class="fa-solid fa-user"></i> Profile
-            </a>
-        </li>
-
-        <li>
-            <a href="feedback.php">
-                <i class="fa-solid fa-comment"></i> Feedback
             </a>
         </li>
 
@@ -118,21 +126,76 @@ Welcome, Komal 👋
 <th>Status</th>
 </tr>
 
-<tr>
-<td>Python Programming</td>
-<td>Reema Thareja</td>
-<td>15 Jul 2026</td>
-<td>30 Jul 2026</td>
-<td>Issued</td>
-</tr>
+
+<?php
+
+$student_id = 2;
+
+$borrowed_books = mysqli_query($conn,
+
+"SELECT 
+books.title,
+books.author,
+issued_books.issue_date,
+issued_books.due_date,
+issued_books.status
+
+FROM issued_books
+
+INNER JOIN books
+ON issued_books.book_id = books.book_id
+
+WHERE issued_books.student_id='$student_id'
+
+ORDER BY issued_books.issue_id DESC
+
+LIMIT 5"
+
+);
+
+
+if(mysqli_num_rows($borrowed_books) > 0)
+{
+
+while($row = mysqli_fetch_assoc($borrowed_books))
+{
+
+?>
 
 <tr>
-<td>Artificial Intelligence</td>
-<td>Stuart Russell</td>
-<td>12 Jul 2026</td>
-<td>27 Jul 2026</td>
-<td>Issued</td>
+
+<td><?php echo $row['title']; ?></td>
+
+<td><?php echo $row['author']; ?></td>
+
+<td><?php echo $row['issue_date']; ?></td>
+
+<td><?php echo $row['due_date']; ?></td>
+
+<td><?php echo $row['status']; ?></td>
+
 </tr>
+
+
+<?php
+
+}
+
+}
+else
+{
+
+?>
+
+<tr>
+<td colspan="5">No Borrowed Books</td>
+</tr>
+
+<?php
+
+}
+
+?>
 
 </table>
 

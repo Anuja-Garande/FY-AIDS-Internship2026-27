@@ -1,3 +1,29 @@
+<?php
+
+session_start();
+
+include "../includes/db_connect.php";
+
+// Statistics
+
+$total_books = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM books")
+)['total'];
+
+$total_students = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM student")
+)['total'];
+
+$issued_books = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM issued_books WHERE status='Issued'")
+)['total'];
+
+$total_categories = mysqli_fetch_assoc(
+mysqli_query($conn,"SELECT COUNT(*) AS total FROM categories")
+)['total'];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,15 +66,28 @@
             </a>
         </li>
 
+        
         <li>
-            <a href="manage_librarians.php">
-            <i class="fa-solid fa-user-tie"></i> Librarians
+            <a href="issued_books.php">
+            <i class="fa-solid fa-book-open"></i> Issued Books
+            </a>
+</li>
+
+<li>
+    <a href="returned_books.php">
+    <i class="fa-solid fa-rotate-left"></i> Returned Books
+    </a>
+</li>   
+        
+        <li>
+            <a href="reports.php">
+            <i class="fa-solid fa-chart-column"></i> Reports
             </a>
         </li>
 
         <li>
-            <a href="reports.php">
-            <i class="fa-solid fa-chart-column"></i> Reports
+            <a href="manage_students.php">
+            <i class="fa-solid fa-user-graduate"></i> Students
             </a>
         </li>
 
@@ -86,7 +125,7 @@
 
 <i class="fa-solid fa-book"></i>
 
-<h2>1500</h2>
+<h2><?php echo $total_books; ?></h2>
 
 <p>Total Books</p>
 
@@ -96,8 +135,7 @@
 
 <i class="fa-solid fa-user-graduate"></i>
 
-<h2>1200</h2>
-
+<h2><?php echo $total_students; ?></h2>
 <p>Total Students</p>
 
 </div>
@@ -106,7 +144,7 @@
 
 <i class="fa-solid fa-book-open-reader"></i>
 
-<h2>486</h2>
+<h2><?php echo $issued_books; ?></h2>
 
 <p>Books Issued</p>
 
@@ -116,7 +154,7 @@
 
 <i class="fa-solid fa-layer-group"></i>
 
-<h2>18</h2>
+<h2><?php echo $total_categories; ?></h2>
 
 <p>Categories</p>
 

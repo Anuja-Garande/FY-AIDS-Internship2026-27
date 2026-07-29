@@ -194,3 +194,139 @@ header{
 }
 
 }
+/* ================= MOBILE DASHBOARD RESPONSIVE ================= */
+
+@media (max-width: 600px) {
+    body {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .logo {
+        padding: 18px 15px;
+    }
+
+    .logo h2 {
+        font-size: 22px;
+    }
+
+    .sidebar ul {
+        margin-top: 0;
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .sidebar ul li {
+        margin: 0;
+        flex: 0 0 auto;
+    }
+
+    .sidebar ul li a {
+        padding: 12px 15px;
+        font-size: 13px;
+    }
+
+    .sidebar ul li a i {
+        width: auto;
+        margin-right: 5px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    header {
+        padding: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    header h1 {
+        font-size: 23px;
+    }
+
+    .admin-profile {
+        font-size: 14px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+        padding: 18px;
+        gap: 16px;
+    }
+
+    .card {
+        padding: 22px;
+    }
+
+    .card i {
+        font-size: 38px;
+    }
+
+    .card h2 {
+        font-size: 28px;
+    }
+
+    .recent {
+        margin: 0 18px 18px;
+        padding: 18px;
+        overflow-x: auto;
+    }
+
+    .recent h2 {
+        font-size: 20px;
+    }
+
+    table {
+        min-width: 650px;
+        font-size: 13px;
+    }
+
+    table th,
+    table td {
+        padding: 11px 9px;
+    }
+}
+
+@media (max-width: 380px) {
+    .sidebar ul li a {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    .cards {
+        padding: 12px;
+    }
+
+    .recent {
+        margin: 0 12px 12px;
+        padding: 14px;
+    }
+}
+.edit-btn{
+    display:inline-block;
+    margin-top:20px;
+    background:#1E3A8A;
+    color:#fff;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:8px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.edit-btn:hover{
+    background:#17346B;
+}
