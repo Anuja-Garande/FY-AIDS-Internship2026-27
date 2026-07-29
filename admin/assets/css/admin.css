@@ -1,0 +1,37 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', 'Segoe UI', sans-serif; background: #f4f6f9; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
+.sidebar { z-index: 1040; }
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+.stat-card { transition: all 0.3s ease; }
+.stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+.stat-icon { border-radius: 12px; }
+.card { border: none; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.card-header { background: #fff; border-bottom: 1px solid #eee; padding: 15px 20px; }
+.table th { white-space: nowrap; }
+.btn-action { border-radius: 6px; font-size: 12px; padding: 4px 10px; }
+.badge { border-radius: 6px; }
+.modal-content { border-radius: 12px; border: none; }
+.modal-header { border-bottom: 1px solid #eee; }
+.modal-footer { border-top: 1px solid #eee; }
+.form-control, .form-select { border-radius: 8px; border: 2px solid #e9ecef; transition: border-color 0.3s; }
+.form-control:focus, .form-select:focus { border-color: #e94560; box-shadow: 0 0 0 0.2rem rgba(233,69,96,0.15); }
+.form-floating .form-control { border-radius: 10px; }
+.form-check-input:checked { background-color: #e94560; border-color: #e94560; }
+.form-switch .form-check-input { width: 3em; height: 1.5em; }
+.table-hover tbody tr:hover { background-color: rgba(233,69,96,0.03); }
+.page-link { border-radius: 8px; margin: 0 2px; }
+.page-item.active .page-link { background: #e94560; border-color: #e94560; }
+.alert { border-radius: 10px; border: none; }
+.dropdown-menu { border-radius: 10px; border: none; box-shadow: 0 5px 25px rgba(0,0,0,0.1); }
+.alert-success { background: rgba(28,200,138,0.1); color: #1cc88a; }
+.alert-danger { background: rgba(231,74,59,0.1); color: #e74a3b; }
+@media print {
+    .sidebar, .topbar, .btn, form { display: none !important; }
+    .main-content { margin-left: 0 !important; }
+    .content-wrapper { padding: 10px !important; }
+}

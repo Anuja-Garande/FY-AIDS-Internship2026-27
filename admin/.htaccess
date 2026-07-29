@@ -1,0 +1,21 @@
+RewriteEngine On
+RewriteBase "/AI Shopping/admin/"
+
+# Allow admin assets (CSS, JS, images)
+RewriteRule ^assets/ - [L]
+
+# Allow admin login page
+RewriteRule ^login\.php$ - [L]
+
+# Allow admin logout
+RewriteRule ^logout\.php$ - [L]
+
+# Allow AJAX endpoints under admin
+RewriteRule ^ajax/ - [L]
+
+# Allow uploads directory
+RewriteRule ^uploads/ - [L]
+
+# For all other admin requests, check session
+RewriteCond %{HTTP_COOKIE} !PHPSESSID [NC]
+RewriteRule ^(.*)$ login.php [R=302,L]
